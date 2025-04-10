@@ -31,9 +31,9 @@ async def test_client_basic_query():
         assert isinstance(response, str)
         assert len(response) > 0
         
-        # Extract the final number from the verbose response
+        # Extract the final number from the verbose response (handles both boxed and plain formats)
         import re
-        match = re.search(r'\*\*Final number:\*\* (\d+)', response)
+        match = re.search(r'\*\*Final number:\*\* (?:\\boxed\{)?(\d+)(?:\})?', response)
         assert match, f"Could not find final number in response: {response}"
         answer = int(match.group(1))
         expected = 2 + random_num
