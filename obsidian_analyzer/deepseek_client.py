@@ -1,6 +1,6 @@
 import os
 import httpx
-from typing import Optional, Dict, Any, AsyncGenerator
+from typing import Optional, Dict, Any, AsyncGenerator, List
 import json
 
 class DeepseekClient:
@@ -10,7 +10,7 @@ class DeepseekClient:
         base_url: str = "https://api.deepseek.com/v1",
         model: str = "deepseek-chat",
         temperature: float = 0.2,
-        timeout: int = 120
+        timeout: int = 30
     ):
         self.api_key = api_key
         self.base_url = base_url
@@ -26,9 +26,15 @@ class DeepseekClient:
             timeout=timeout
         )
 
+    async def ainvoke(self, prompt: str) -> str:
+        """Invoke the API with a single prompt and return the response"""
+        messages = [{"role": "user", "content": prompt}]
+        async for response in self.chat_completion(messages, stream=False):
+            return response["choices"][0]["message"]["content"]
+
     async def chat_completion(
         self,
-        messages: list[Dict[str, str]],
+        messages: List[Dict[str, str]],
         stream: bool = False
     ) -> AsyncGenerator[Dict[str, Any], None]:
         """Make a chat completion request to Deepseek API"""
