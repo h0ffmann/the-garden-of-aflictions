@@ -26,14 +26,25 @@ class LLMProvider(ABC):
         """Close any open resources"""
         pass
 
+class MCPThought(BaseModel):
+    thought: str
+    nextThoughtNeeded: bool
+    thoughtNumber: int
+    totalThoughts: int
+    isRevision: bool = False
+    revisesThought: Optional[int] = None
+    branchFromThought: Optional[int] = None
+    branchId: Optional[str] = None
+    needsMoreThoughts: Optional[bool] = None
+
 class MCPRequest(BaseModel):
-    prompt: str
-    model: str
+    tool: str = "sequential_thinking"
+    inputs: MCPThought
+    model: str = "sequential-thinking"
     temperature: float = 0.2
-    max_tokens: int = 2000
 
 class MCPResponse(BaseModel):
-    text: str
+    output: str
     tokens_used: int
 
 class MCPClient(LLMProvider):
@@ -51,17 +62,23 @@ class MCPClient(LLMProvider):
         )
 
     async def ainvoke(self, prompt: str) -> str:
-        """Make a request to MCP server"""
+        """Make a request to MCP server using sequential thinking"""
+        thought = MCPThought(
+            thought=prompt,
+            nextThoughtNeeded=False,
+            thoughtNumber=1,
+            totalThoughts=1
+        )
         request = MCPRequest(
-            prompt=prompt,
+            inputs=thought,
             model=self.model
         )
         response = await self.client.post(
-            "/v1/completions",
+            "/v1/invoke",
             json=request.dict()
         )
         response.raise_for_status()
-        return MCPResponse(**response.json()).text
+        return MCPResponse(**response.json()).output
 
     async def chat_completion(
         self,
