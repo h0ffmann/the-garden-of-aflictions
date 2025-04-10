@@ -9,7 +9,7 @@ class TestFileHandler:
         content = read_file("test.txt")
         assert content == "Test content"
 
-    @patch('PyPDF2.PdfReader')
+    @patch('pypdf.PdfReader')
     @patch('os.path.join')
     @patch('os.path.isfile', return_value=True)
     @patch('builtins.print')
@@ -23,9 +23,11 @@ class TestFileHandler:
         # Mock path joining to return the input path
         mock_join.side_effect = lambda *args: args[-1]
     
-        content = read_file("test.pdf")
-        assert content == "PDF content\n\n"
-        mock_print.assert_not_called()
+        # Mock the file handler to use our mocked PDF reader
+        with patch('obsidian_analyzer.file_handler.PdfReader', mock_pdf):
+            content = read_file("test.pdf")
+            assert content == "PDF content\n\n"
+            mock_print.assert_not_called()
 
     def test_read_nonexistent_file(self):
         """Test reading nonexistent file"""
