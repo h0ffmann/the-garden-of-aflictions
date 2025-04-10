@@ -18,17 +18,17 @@ run file="test_data/sample_article.md":
 # Run tests
 test:
     uv pip install -e ".[dev]"
-    . ${VENV}/bin/activate && pytest tests/ -v
+    . .venv/bin/activate && pytest tests/ -v
 
 # Run tests with coverage
 test-cov:
     uv pip install -e ".[dev]"
-    . ${VENV}/bin/activate && pytest tests/ --cov=obsidian_analyzer --cov-report=term-missing
+    . .venv/bin/activate && pytest tests/ --cov=obsidian_analyzer --cov-report=term-missing
 
 # Run specific test file
 test-file file="tests/test_text_processor.py":
     uv pip install -e ".[dev]"
-    . ${VENV}/bin/activate && pytest {{file}} -v
+    . .venv/bin/activate && pytest {{file}} -v
 
 # Clean project
 clean:
