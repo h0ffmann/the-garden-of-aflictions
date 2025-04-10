@@ -17,7 +17,15 @@ run file="test_data/sample_article.md":
 
 # Run tests
 test:
-    ${PYTHON} -m pytest tests/
+    ${PYTHON} -m pytest tests/ -v
+
+# Run tests with coverage
+test-cov:
+    ${PYTHON} -m pytest tests/ --cov=obsidian_analyzer --cov-report=term-missing
+
+# Run specific test file
+test-file file="tests/test_text_processor.py":
+    ${PYTHON} -m pytest {{file}} -v
 
 # Clean project
 clean:
