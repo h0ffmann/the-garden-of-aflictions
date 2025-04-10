@@ -31,12 +31,12 @@ async def test_client_basic_query():
         assert isinstance(response, str)
         assert len(response) > 0
         
-        # Try to extract the numeric answer
-        try:
-            answer = int(response.strip())
-            expected = 2 + random_num
-            assert answer == expected, f"Expected {expected} but got {answer}"
-        except ValueError:
-            assert False, f"Response '{response}' is not a valid number"
+        # Extract the final number from the verbose response
+        import re
+        match = re.search(r'\*\*Final number:\*\* (\d+)', response)
+        assert match, f"Could not find final number in response: {response}"
+        answer = int(match.group(1))
+        expected = 2 + random_num
+        assert answer == expected, f"Expected {expected} but got {answer}"
     except Exception as e:
         pytest.fail(f"Client test failed: {str(e)}")

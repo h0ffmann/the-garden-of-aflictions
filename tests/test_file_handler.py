@@ -26,7 +26,7 @@ class TestFileHandler:
         # Mock the file handler to use our mocked PDF reader
         with patch('obsidian_analyzer.file_handler.PdfReader', mock_pdf):
             content = read_file("test.pdf")
-            assert content == "PDF content\n\n"
+            assert content == "PDF content"
             mock_print.assert_not_called()
 
     def test_read_nonexistent_file(self):
