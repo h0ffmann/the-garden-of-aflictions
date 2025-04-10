@@ -2,8 +2,9 @@ import os
 import httpx
 from typing import Optional, Dict, Any, AsyncGenerator, List
 import json
+from .llm_provider import LLMProvider
 
-class DeepseekClient:
+class DeepseekClient(LLMProvider):
     def __init__(
         self,
         api_key: str,
