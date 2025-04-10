@@ -19,6 +19,18 @@ requires-python = ">=3.10"
 [project.scripts]
 obsidian-analyzer = "obsidian_analyzer.main:main"
 
-[tool.uv]
-pip-version = "24.0"
-resolution = "highest"
+[project.optional-dependencies]
+dev = [
+    "black==24.0.0",
+    "isort==5.13.2",
+    "flake8==7.0.0",
+    "mypy==1.9.0",
+    "pytest==8.0.0",
+    "pytest-asyncio==0.23.6",
+    "pytest-cov==4.1.0",
+    "pytest-mock==3.14.0",
+]
+
+[build-system]
+requires = ["uv>=0.1.0"]
+build-backend = "uv.build:build"
