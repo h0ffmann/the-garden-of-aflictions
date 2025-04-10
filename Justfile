@@ -1,24 +1,50 @@
-# Development tasks
+# Development tasks using UV
+VENV := ".venv"
+PYTHON := "${VENV}/bin/python"
+
+# Initialize project with UV
+init:
+    uv venv
+    uv pip install -e .
+
+# Install dependencies
 install:
-    pip install -r requirements.txt
+    uv pip install -e ".[dev]"
 
+# Run the analyzer
 run file="test_data/sample_article.md":
-    python -m obsidian_analyzer.main {{file}} -o analysis_output
+    ${PYTHON} -m obsidian_analyzer.main {{file}} -o analysis_output
 
+# Run tests
 test:
-    python -m pytest tests/
+    ${PYTHON} -m pytest tests/
 
+# Clean project
 clean:
     rm -rf analysis_output/*
     rm -rf __pycache__
+    rm -rf .mypy_cache
+    rm -rf .pytest_cache
 
+# Format code
 format:
     black obsidian_analyzer/
     isort obsidian_analyzer/
 
+# Lint code
 lint:
     flake8 obsidian_analyzer/
     mypy obsidian_analyzer/
 
+# Setup NLTK data
 setup-nltk:
-    python -c "import nltk; nltk.download('stopwords'); nltk.download('punkt')"
+    ${PYTHON} -c "import nltk; nltk.download('stopwords'); nltk.download('punkt')"
+
+# Update dependencies
+update:
+    uv pip compile --upgrade
+    uv pip sync
+
+# Run in development mode
+dev:
+    ${PYTHON} -m obsidian_analyzer.main test_data/sample_article.md -o analysis_output --langs en pt

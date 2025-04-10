@@ -433,21 +433,47 @@ O fluxo ilustra como as revoluções industrial e francesa estabeleceram promess
 
 ---
 
-## How to Contribute
+## Installation
 
-This philosophical and historical mapping is constantly evolving. Contributions are welcome to:
+This project uses [UV](https://github.com/astral-sh/uv) for package management. To get started:
 
-- Expand connections between thinkers
-- Add new perspectives  
-- Deepen existing analyses
-- Improve translations
-- Suggest additional thinkers/concepts
+1. Install UV if you haven't already:
+```bash
+curl -LsSf https://astral.sh/uv/install.sh | sh
+```
 
-### Contribution Guidelines
+2. Set up the project:
+```bash
+just init
+```
 
-1. Fork the repository
-2. Create a branch for your changes
-3. Submit a pull request with:
+3. Install NLTK data:
+```bash
+just setup-nltk
+```
+
+## Usage
+
+### Running the analyzer
+```bash
+just run file="path/to/your/file.md"
+```
+
+### Development commands
+- Format code: `just format`
+- Lint code: `just lint`
+- Run tests: `just test`
+- Update dependencies: `just update`
+
+## Development Workflow
+
+1. Create a new branch for your changes
+2. Make your changes
+3. Run tests and linting:
+```bash
+just test && just lint
+```
+4. Submit a pull request with:
    - Clear description of changes
    - References/sources when applicable
    - Both Portuguese and English versions when possible

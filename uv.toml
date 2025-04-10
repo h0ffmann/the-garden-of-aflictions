@@ -1,0 +1,13 @@
+[uv]
+pip = "24.0"
+resolution = "highest"
+
+[tool.uv.sources]
+langchain-openai = { git = "https://github.com/langchain-ai/langchain.git" }
+
+[tool.uv.dev-dependencies]
+black = "24.0.0"
+isort = "5.13.2"
+flake8 = "7.0.0"
+mypy = "1.9.0"
+pytest = "8.0.0"
