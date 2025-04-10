@@ -46,6 +46,15 @@ format:
 lint:
     flake8 obsidian_analyzer/
     mypy obsidian_analyzer/
+    ruff check obsidian_analyzer/
+
+# Format code with ruff
+ruff-format:
+    ruff format obsidian_analyzer/
+
+# Fix lint issues
+ruff-fix:
+    ruff check --fix obsidian_analyzer/
 
 # Setup NLTK data
 setup-nltk:
