@@ -2,6 +2,9 @@ import os
 import re
 import asyncio
 import wikipedia
+from itertools import combinations
+from .config import settings
+from .llm_provider import LLMProvider
 import nltk
 import matplotlib
 matplotlib.use('Agg')
@@ -42,17 +45,6 @@ except ImportError as e:
 load_dotenv()
 
 class TextProcessor:
-    def __init__(self):
-        import logging
-        self.logger = logging.getLogger(__name__)
-        self.logger.info("Initializing TextProcessor")
-        self._setup_nltk()
-        self.llm = self._init_llm()
-        self.logger.info("TextProcessor initialized successfully")
-        self.text_splitter = RecursiveCharacterTextSplitter(
-            chunk_size=4000, 
-            chunk_overlap=300
-        )
 
     def _setup_nltk(self):
         try:
