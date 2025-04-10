@@ -17,6 +17,13 @@ class Settings(BaseSettings):
     text_chunk_overlap: int = 300
     max_entity_pairs: int = 8
     
+    # MCP settings
+    mcp_enabled: bool = False
+    mcp_server_url: str = "http://localhost:8080"
+    mcp_api_key: str = ""
+    mcp_model: str = "sequential-thinking"
+    mcp_timeout: int = 60
+    
     class Config:
         env_prefix = "obsidian_analyzer_"
         case_sensitive = False
