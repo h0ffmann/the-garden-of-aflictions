@@ -11,10 +11,11 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python-version: ["3.12"]
+        python-version: ["3.12"] # Only testing on 3.12 as per requires-python
 
     steps:
-    - uses: actions/checkout@v4
+    - name: Checkout code
+      uses: actions/checkout@v4
 
     - name: Set up Python ${{ matrix.python-version }}
       uses: actions/setup-python@v5
@@ -22,16 +23,33 @@ jobs:
         python-version: ${{ matrix.python-version }}
 
     - name: Install uv
-      run: pip install uv
+      run: curl -LsSf https://astral.sh/uv/install.sh | sh
+      # Ensure uv is in the PATH for subsequent steps
+    - name: Add uv to PATH
+      run: echo "$HOME/.cargo/bin" >> $GITHUB_PATH
 
-    - name: Install dependencies
+
+    - name: Create Virtual Environment using uv
+      run: uv venv .venv # Create a venv named .venv in the project root
+
+    - name: Install Dependencies using uv
       run: |
-        uv pip install -e ".[dev]"
-        python -m nltk.downloader punkt
+        # uv pip will automatically detect and use the .venv in the current directory
+        # Combine installations for efficiency
+        uv pip install -e ".[dev]" pytest pytest-asyncio
+        # Download NLTK data within the venv context
+        uv run python -m nltk.downloader punkt stopwords
 
     - name: Run tests
       run: |
-        uv pip install pytest pytest-asyncio
+        # Run pytest; it should be available from the installed dev dependencies in the venv
+        # actions/setup-python usually adds script dirs to PATH, or use uv run explicitly
+        # Option 1 (usually works):
         pytest tests/ -v --log-level=INFO
+        # Option 2 (more explicit):
+        # uv run pytest tests/ -v --log-level=INFO
       env:
+        # Expose the API key *only* to the test execution step
         DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
+        # Ensure pytest can find the obsidian_analyzer package
+        PYTHONPATH: ${{ github.workspace }}
