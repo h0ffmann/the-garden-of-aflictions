@@ -87,14 +87,11 @@ dev:
 # Export Rubem Alves subsection to Obsidian
 export-alves output_dir="analysis_output":
     mkdir -p "{{output_dir}}"
-    # Extract section using Python (simpler than awk)
-    @python -c "\
-import re;\
-with open('ESSAY.md', 'r') as f: text = f.read();\
-section = re.search(r'## Ensaio: O Jardim dos Espinhos Florescentes.*?(?=^---)', text, re.DOTALL|re.MULTILINE);\
-if section:\
-    with open('{{output_dir}}/rubem_alves_ensaio.md', 'w') as out: out.write(section.group(0))\
-"
+    # Extract section using dedicated script
+    @python -m obsidian_analyzer.extract_section \
+        "ESSAY.md" \
+        "{{output_dir}}/rubem_alves_ensaio.md" \
+        "## Ensaio: O Jardim dos Espinhos Florescentes"
     # Run analysis with Portuguese only
     @python -m obsidian_analyzer.main \
         "{{output_dir}}/rubem_alves_ensaio.md" \
