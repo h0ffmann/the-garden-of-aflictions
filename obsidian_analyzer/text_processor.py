@@ -49,14 +49,15 @@ class TextProcessor:
     def _init_llm(self):
         api_key = os.getenv("DEEPSEEK_API_KEY")
         if not api_key:
-            raise ValueError("API Key missing")
+            raise ValueError("DEEPSEEK_API_KEY environment variable missing")
 
-        return AsyncChatModel(
-            model=os.getenv("DEEPSEEK_MODEL_NAME", "deepseek-chat"),
+        from .deepseek_client import DeepseekClient
+        return DeepseekClient(
             api_key=api_key,
-            base_url=os.getenv("DEEPSEEK_API_BASE"),
+            base_url=os.getenv("DEEPSEEK_API_BASE", "https://api.deepseek.com/v1"),
+            model=os.getenv("DEEPSEEK_MODEL_NAME", "deepseek-chat"),
             temperature=0.2,
-            request_timeout=120
+            timeout=120
         )
 
     async def analyze_text(self, file_path: str, langs: List[str], options: Dict) -> Dict:
