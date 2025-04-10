@@ -1,5 +1,5 @@
 from abc import ABC, abstractmethod
-from typing import List, Dict, Any, AsyncGenerator
+from typing import List, Dict, Any, AsyncGenerator, Optional
 import httpx
 import json
 from pydantic import BaseModel
