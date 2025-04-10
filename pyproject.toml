@@ -32,7 +32,6 @@ dev = [
     "pytest-asyncio==0.23.7",
     "pytest-cov==4.1.0",
     "pytest-mock==3.14.0",
-    "types-dotenv>=1.0.0",  # For better type checking
 ]
 
 [build-system]
