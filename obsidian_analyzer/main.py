@@ -27,7 +27,8 @@ async def main():
     psr.add_argument("--max-pairs", type=int, default=8)
     
     args = psr.parse_args()
-
+    
+    text_processor = TextProcessor()
     if text_processor.llm is None:
         print("LLM initialization failed")
         sys.exit(1)
