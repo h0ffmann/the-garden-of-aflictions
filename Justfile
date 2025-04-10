@@ -116,8 +116,8 @@ stop-mcp-server:
 
 test-mcp-connectivity:
     # Test connectivity to MCP server
-    uv pip install -e ".[dev]" pydantic-settings
-    source .venv/bin/activate && OBSIDIAN_ANALYZER_MCP_ENABLED=true pytest tests/test_mcp_connectivity.py -v --log-level=INFO
+    uv pip install -e ".[dev]" pydantic-settings httpx
+    OBSIDIAN_ANALYZER_MCP_ENABLED=true pytest tests/test_mcp_connectivity.py -v --log-level=INFO
 
 test-mcp-connectivity-quiet:
     # Test connectivity to MCP server (quiet)

@@ -29,6 +29,7 @@ class Settings(BaseSettings):
     class Config:
         env_prefix = "obsidian_analyzer_"
         case_sensitive = False
+        extra = "forbid"
 
 # Initialize settings
 settings = Settings()
