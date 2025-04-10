@@ -91,7 +91,8 @@ export-alves output_dir="analysis_output":
     awk '/## Ensaio: O Jardim dos Espinhos Florescentes/,/^---/' ESSAY.md | \
     sed '/^---/d' > "{{output_dir}}/rubem_alves_ensaio.md"
     # Run analysis with Portuguese only
-    @python -m obsidian_analyzer.main "{{output_dir}}/rubem_alves_ensaio.md" \
+    @PYTHON -c "from obsidian_analyzer.main import main; import asyncio; asyncio.run(main())" \
+        "{{output_dir}}/rubem_alves_ensaio.md" \
         -o "{{output_dir}}/rubem_alves_analysis" \
         --langs pt \
         --skip-multi \
