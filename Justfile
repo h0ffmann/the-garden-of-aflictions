@@ -5,7 +5,7 @@ PYTHON := "${VENV}/bin/python"
 # Initialize project with UV
 init:
     uv venv
-    uv pip install -e .
+    uv pip install -e ".[dev]"
 
 # Install dependencies
 install:
@@ -116,7 +116,7 @@ stop-mcp-server:
 
 test-mcp-connectivity:
     # Test connectivity to MCP server
-    uv pip install -e ".[dev]"
+    uv pip install -e ".[dev]" pydantic-settings
     . .venv/bin/activate && OBSIDIAN_ANALYZER_MCP_ENABLED=true pytest tests/test_mcp_connectivity.py -v --log-level=INFO
 
 test-mcp-connectivity-quiet:
