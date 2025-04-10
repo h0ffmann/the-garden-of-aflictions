@@ -1,0 +1,13 @@
+Analise as características polêmicas no texto abaixo, considerando:
+
+1. Uso de afirmações controversas
+2. Estratégias retóricas
+3. Relação com o contexto filosófico
+4. Potencial impacto no debate
+
+Texto: {text}
+
+Responda no formato:
+- Principais polêmicas: [lista]
+- Estratégias retóricas: [descrição]
+- Contexto filosófico: [análise]

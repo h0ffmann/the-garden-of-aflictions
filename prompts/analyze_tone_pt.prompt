@@ -1,0 +1,13 @@
+Analise o tom predominante no texto abaixo, considerando:
+
+1. Características emocionais
+2. Relação autor-leitor
+3. Estilo e escolhas linguísticas
+4. Contexto filosófico
+
+Texto: {text}
+
+Responda no formato:
+- Tom predominante: [descritor]
+- Características: [lista]
+- Efeito no leitor: [análise]

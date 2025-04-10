@@ -1,0 +1,13 @@
+Analise o nível de agressividade no texto abaixo. Considere:
+
+1. Uso de linguagem hostil ou confrontativa
+2. Tom geral e intenção percebida
+3. Contexto filosófico/histórico
+4. Grau de polarização
+
+Texto: {text}
+
+Responda no formato:
+- Nível de agressividade: [baixo/médio/alto]
+- Exemplos: [trechos relevantes]
+- Contexto: [análise contextual]

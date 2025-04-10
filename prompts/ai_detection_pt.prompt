@@ -1,0 +1,12 @@
+Analise o texto abaixo e determine se ele foi gerado por IA ou escrito por um humano. Considere:
+
+1. Fluidez e naturalidade da linguagem
+2. Padrões repetitivos ou formulaicos
+3. Profundidade de análise e originalidade
+4. Erros ou peculiaridades humanas
+
+Texto: {text}
+
+Responda no formato:
+- Probabilidade de ser IA: X%
+- Razões: [lista de razões]
