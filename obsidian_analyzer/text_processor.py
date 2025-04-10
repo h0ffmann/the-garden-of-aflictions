@@ -15,8 +15,22 @@ from langchain.chains.summarize import load_summarize_chain
 from nltk.corpus import stopwords
 from nltk.tokenize import word_tokenize
 import sys
+import re
 from dotenv import load_dotenv
 from .prompt_loader import load_prompt
+
+def sanitize_filename(filename: str) -> str:
+    """Sanitize a string to be safe for use as a filename."""
+    # Remove invalid characters
+    filename = re.sub(r'[<>:"/\\|?*\x00-\x1F]', "", filename)
+    # Replace spaces with underscores
+    filename = filename.replace(" ", "_")
+    # Remove leading/trailing whitespace
+    filename = filename.strip()
+    # Truncate long filenames
+    if len(filename) > 255:
+        filename = filename[:255]
+    return filename
 
 try:
     from langchain_openai import ChatOpenAI as AsyncChatModel
