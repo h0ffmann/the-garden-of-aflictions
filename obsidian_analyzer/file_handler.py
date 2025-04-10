@@ -1,6 +1,5 @@
 import os
-import PyPDF2
-from PyPDF2 import PdfReader
+from pypdf import PdfReader
 
 def read_file(file_path: str) -> str | None:
     """Read file from garden directory or absolute path"""

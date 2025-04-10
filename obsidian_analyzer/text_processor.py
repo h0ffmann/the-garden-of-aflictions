@@ -14,10 +14,10 @@ from langchain_core.prompts import PromptTemplate
 from langchain.chains.summarize import load_summarize_chain
 from nltk.corpus import stopwords
 from nltk.tokenize import word_tokenize
-try: 
+try:
     from langchain_openai import ChatOpenAI as AsyncChatModel
-except ImportError: 
-    print("ERROR: langchain-openai required")
+except ImportError as e:
+    print(f"ERROR: {e}. Please install langchain-openai>=0.1.3")
     sys.exit(1)
 from .prompt_loader import load_prompt
 from dotenv import load_dotenv

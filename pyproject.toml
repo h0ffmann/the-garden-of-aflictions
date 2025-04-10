@@ -6,29 +6,30 @@ authors = [
     {name = "Your Name", email = "your@email.com"},
 ]
 dependencies = [
-    "langchain-openai>=0.1.0",
-    "python-dotenv>=1.0.0",
-    "PyPDF2>=3.0.0",
-    "nltk>=3.8.0",
-    "matplotlib>=3.7.0",
-    "wikipedia>=1.4.0",
-    "aiofiles>=23.2.0",
+    "langchain-openai>=0.1.3",
+    "python-dotenv>=1.0.1",
+    "pypdf>=4.2.0",  # Replacing PyPDF2 which is deprecated
+    "nltk>=3.8.1",
+    "matplotlib>=3.8.0",
+    "wikipedia>=1.4.1",
+    "aiofiles>=23.2.1",
 ]
-requires-python = ">=3.10"
+requires-python = ">=3.12"
 
 [project.scripts]
 obsidian-analyzer = "obsidian_analyzer.main:main"
 
 [project.optional-dependencies]
 dev = [
-    "black==24.0.0",
+    "black==24.3.0",
     "isort==5.13.2",
     "flake8==7.0.0",
     "mypy==1.9.0",
-    "pytest==8.0.0",
-    "pytest-asyncio==0.23.6",
+    "pytest==8.1.1",
+    "pytest-asyncio==0.23.7",
     "pytest-cov==4.1.0",
     "pytest-mock==3.14.0",
+    "types-python-dotenv>=1.0.0",  # For better type checking
 ]
 
 [build-system]
