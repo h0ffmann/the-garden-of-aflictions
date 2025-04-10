@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python-version: ["3.12"] # Only testing on 3.12 as per requires-python
+        python-version: ["3.12"]
 
     steps:
     - name: Checkout code
@@ -24,32 +24,24 @@ jobs:
 
     - name: Install uv
       run: curl -LsSf https://astral.sh/uv/install.sh | sh
-      # Ensure uv is in the PATH for subsequent steps
     - name: Add uv to PATH
       run: echo "$HOME/.cargo/bin" >> $GITHUB_PATH
 
-
     - name: Create Virtual Environment using uv
-      run: uv venv .venv # Create a venv named .venv in the project root
+      run: uv venv .venv
 
     - name: Install Dependencies using uv
       run: |
-        # uv pip will automatically detect and use the .venv in the current directory
-        # Combine installations for efficiency
+        # Install main/dev dependencies + test dependencies
         uv pip install -e ".[dev]" pytest pytest-asyncio
-        # Download NLTK data within the venv context
+        # Download NLTK data using the Python in the venv
         uv run python -m nltk.downloader punkt stopwords
 
-    - name: Run tests
+    - name: Run tests using uv run
       run: |
-        # Run pytest; it should be available from the installed dev dependencies in the venv
-        # actions/setup-python usually adds script dirs to PATH, or use uv run explicitly
-        # Option 1 (usually works):
-        pytest tests/ -v --log-level=INFO
-        # Option 2 (more explicit):
-        # uv run pytest tests/ -v --log-level=INFO
+        # Use 'uv run' to execute pytest within the environment
+        uv run pytest tests/ -v --log-level=INFO
       env:
-        # Expose the API key *only* to the test execution step
         DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
-        # Ensure pytest can find the obsidian_analyzer package
+        # PYTHONPATH may not be strictly necessary when using 'uv run' but can be kept for safety
         PYTHONPATH: ${{ github.workspace }}
