@@ -37,4 +37,79 @@ class ObsidianGenerator:
         
         await asyncio.gather(*tasks)
 
-    # [Rest of ObsidianGenerator implementation would go here...]
+    async def _generate_index_note(self, lang: str, results: Dict, output_dir: Path) -> None:
+        """Generate index note for the vault"""
+        content = f"# Analysis of {results['source_file']}\n\n"
+        content += "## Key Entities\n"
+        for entity in results.get('entities', []):
+            content += f"- [[{entity}]]\n"
+        
+        file_path = output_dir / "00 Index.md"
+        async with aiofiles.open(file_path, 'w') as f:
+            await f.write(content)
+
+    async def _generate_metrics_note(self, lang: str, results: Dict, output_dir: Path) -> None:
+        """Generate metrics note"""
+        if 'metrics' not in results:
+            return
+            
+        content = "# Text Metrics\n\n"
+        for metric, value in results['metrics'].items():
+            content += f"- **{metric}**: {value}\n"
+        
+        file_path = output_dir / "Metrics.md"
+        async with aiofiles.open(file_path, 'w') as f:
+            await f.write(content)
+
+    async def _generate_diagrams_note(self, lang: str, results: Dict, output_dir: Path) -> None:
+        """Generate diagrams note"""
+        if 'diagrams' not in results:
+            return
+            
+        content = "# Diagrams\n\n"
+        for name, diagram in results['diagrams'].items():
+            content += f"## {name}\n```mermaid\n{diagram}\n```\n\n"
+        
+        file_path = output_dir / "Diagrams.md"
+        async with aiofiles.open(file_path, 'w') as f:
+            await f.write(content)
+
+    async def _generate_concepts_note(self, lang: str, results: Dict, output_dir: Path) -> None:
+        """Generate concepts note"""
+        if 'key_concepts' not in results:
+            return
+            
+        content = "# Key Concepts\n\n"
+        for concept, desc in results['key_concepts'].items():
+            content += f"## {concept}\n{desc}\n\n"
+        
+        file_path = output_dir / "Concepts.md"
+        async with aiofiles.open(file_path, 'w') as f:
+            await f.write(content)
+
+    async def _generate_multicorr_note(self, lang: str, results: Dict, output_dir: Path) -> None:
+        """Generate multi-correlation note"""
+        if 'correlations' not in results or 'multi' not in results['correlations']:
+            return
+            
+        content = "# Multi-Entity Correlations\n\n"
+        for theme, entities in results['correlations']['multi'].items():
+            content += f"## {theme}\n"
+            content += "Related entities: " + ", ".join(f"[[{e}]]" for e in entities) + "\n\n"
+        
+        file_path = output_dir / "Multi-Correlations.md"
+        async with aiofiles.open(file_path, 'w') as f:
+            await f.write(content)
+
+    async def _generate_entity_notes(self, lang: str, results: Dict, output_dir: Path) -> None:
+        """Generate individual entity notes"""
+        if 'entities' not in results:
+            return
+            
+        tasks = []
+        for entity in results['entities']:
+            file_path = output_dir / f"{entity}.md"
+            content = f"# {entity}\n\n## Mentions\n- Found in analysis of [[{results['source_file']}]]\n"
+            tasks.append(aiofiles.open(file_path, 'w').write(content))
+        
+        await asyncio.gather(*tasks)

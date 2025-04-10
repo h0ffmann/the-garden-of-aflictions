@@ -1,5 +1,8 @@
 import os
-from pypdf import PdfReader
+try:
+    from pypdf import PdfReader
+except ImportError:
+    from PyPDF2 import PdfReader
 
 import logging
 logger = logging.getLogger(__name__)

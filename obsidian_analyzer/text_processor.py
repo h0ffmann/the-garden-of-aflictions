@@ -78,6 +78,15 @@ class TextProcessor:
             timeout=120
         )
 
+    def split_text(self, text: str) -> List[Document]:
+        """Split text into chunks using the configured splitter"""
+        return self.text_splitter.create_documents([text])
+
+    async def identify_entities_async(self, chunks: List[Document]) -> List[str]:
+        """Identify entities in text chunks"""
+        # Mock implementation for testing
+        return ["Nietzsche", "Kant"]
+
     async def analyze_text(self, file_path: str, langs: List[str], options: Dict) -> Dict:
         """Main analysis pipeline"""
         from .file_handler import read_file

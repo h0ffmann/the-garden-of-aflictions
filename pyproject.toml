@@ -7,7 +7,8 @@ authors = [
 ]
 dependencies = [
     "python-dotenv>=1.0.1",
-    "pypdf>=4.2.0",  # Replacing PyPDF2 which is deprecated
+    "pypdf>=4.2.0",  # Primary PDF reader
+    "PyPDF2>=3.0.0",  # Fallback PDF reader
     "nltk>=3.8.1",
     "matplotlib>=3.8.0",
     "wikipedia>=1.4.0",
