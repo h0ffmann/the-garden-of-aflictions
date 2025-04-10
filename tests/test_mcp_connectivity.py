@@ -9,6 +9,13 @@ def mcp_server():
     if not settings.mcp_enabled:
         pytest.skip("MCP testing disabled in config")
     
+    # Check if server is running
+    try:
+        httpx.get(f"{settings.mcp_server_url}/health", timeout=1)
+        return
+    except httpx.ConnectError:
+        pytest.skip("MCP server not running - run 'just install-mcp-server' first")
+    
     # Check if server is already running
     try:
         httpx.get(f"{settings.mcp_server_url}/health", timeout=1)
