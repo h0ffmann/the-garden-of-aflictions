@@ -86,13 +86,13 @@ dev:
 
 # Export Rubem Alves subsection to Obsidian
 export-alves output_dir="analysis_output":
-    mkdir -p {{output_dir}}
+    mkdir -p "{{output_dir}}"
     # Extract section and clean up markdown formatting
     awk '/## Ensaio: O Jardim dos Espinhos Florescentes/,/^---/' ESSAY.md | \
-    sed '/^---/d' > {{output_dir}}/rubem_alves_ensaio.md
+    sed '/^---/d' > "{{output_dir}}/rubem_alves_ensaio.md"
     # Run analysis with Portuguese only
-    ${PYTHON} -m obsidian_analyzer.main {{output_dir}}/rubem_alves_ensaio.md \
-        -o {{output_dir}}/rubem_alves_analysis \
+    @python -m obsidian_analyzer.main "{{output_dir}}/rubem_alves_ensaio.md" \
+        -o "{{output_dir}}/rubem_alves_analysis" \
         --langs pt \
         --skip-multi \
         --skip-pairs
