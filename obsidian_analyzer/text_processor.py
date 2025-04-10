@@ -87,6 +87,20 @@ class TextProcessor:
         # Mock implementation for testing
         return ["Nietzsche", "Kant"]
 
+    def __init__(self, llm_provider: LLMProvider = None):
+        import logging
+        self.logger = logging.getLogger(__name__)
+        self.logger.info("Initializing TextProcessor")
+        self._setup_nltk()
+        self.llm = llm_provider or self._init_llm()
+        self._api_semaphore = asyncio.Semaphore(settings.max_concurrent_tasks)
+        self._response_cache = {}
+        self.logger.info("TextProcessor initialized successfully")
+        self.text_splitter = RecursiveCharacterTextSplitter(
+            chunk_size=settings.text_chunk_size,
+            chunk_overlap=settings.text_chunk_overlap
+        )
+
     async def analyze_text(self, file_path: str, langs: List[str], options: Dict) -> Dict:
         """Main analysis pipeline"""
         from .file_handler import read_file
@@ -107,18 +121,97 @@ class TextProcessor:
         # Entity identification
         results["entities"] = await self.identify_entities_async(chunks)
 
-        # Parallel analysis tasks - simplified for testing
+        # Run all analysis tasks with concurrency control
         analysis_tasks = []
         for lang in langs:
-            analysis_tasks.extend(self._create_lang_tasks(lang, chunks, results, options))
-        
+            if not options.get("skip_metrics", False):
+                analysis_tasks.append(self._analyze_metrics(lang, chunks, results))
+            if not options.get("skip_concepts", False):
+                analysis_tasks.append(self._analyze_concepts(lang, chunks, results))
+            if not options.get("skip_pairs", False):
+                analysis_tasks.append(self._analyze_entity_pairs(lang, results))
+            if not options.get("skip_multi", False):
+                analysis_tasks.append(self._analyze_multi_correlations(lang, results))
+            if not options.get("skip_diagrams", False):
+                analysis_tasks.append(self._generate_diagrams(lang, results))
+
         if analysis_tasks:
             await asyncio.gather(*analysis_tasks)
 
         return results
 
-    def _create_lang_tasks(self, lang: str, chunks: List[Document], results: Dict, options: Dict) -> List:
-        """Create language-specific analysis tasks"""
-        return []  # Return empty list for basic testing
+    async def _cached_llm_call(self, prompt_name: str, variables: Dict[str, str]) -> str:
+        """Make LLM calls with caching"""
+        cache_key = (prompt_name, frozenset(variables.items()))
+        if cache_key in self._response_cache:
+            return self._response_cache[cache_key]
+
+        prompt = load_prompt(prompt_name, variables)
+        if not prompt:
+            raise ValueError(f"Prompt {prompt_name} not found")
+
+        async with self._api_semaphore:
+            response = await self.llm.ainvoke(prompt)
+            self._response_cache[cache_key] = response
+            return response
+
+    async def _analyze_metrics(self, lang: str, chunks: List[Document], results: Dict) -> None:
+        """Analyze text metrics like tone, aggressiveness etc."""
+        prompt_vars = {
+            "text": "\n\n".join([c.page_content for c in chunks]),
+            "lang": lang
+        }
+        response = await self._cached_llm_call(f"analyze_tone_{lang}", prompt_vars)
+        results["metrics"][lang] = response
+
+    async def _analyze_concepts(self, lang: str, chunks: List[Document], results: Dict) -> None:
+        """Identify and map key concepts"""
+        # First pass - identify concepts
+        prompt_vars = {
+            "text": "\n\n".join([c.page_content for c in chunks]),
+            "lang": lang,
+            "entities": ", ".join(results["entities"])
+        }
+        response = await self._cached_llm_call(f"concepts_map_{lang}", prompt_vars)
+        results["key_concepts"][lang] = response
+
+    async def _analyze_entity_pairs(self, lang: str, results: Dict) -> None:
+        """Analyze correlations between entity pairs"""
+        entities = results["entities"]
+        if len(entities) < 2:
+            return
+
+        pairs = list(combinations(entities, 2))
+        for pair in pairs[:settings.max_entity_pairs]:
+            prompt_vars = {
+                "entity1": pair[0],
+                "entity2": pair[1],
+                "lang": lang
+            }
+            response = await self._cached_llm_call(f"correlate_entities_{lang}", prompt_vars)
+            results["correlations"]["pairs"][f"{pair[0]}-{pair[1]}"] = response
+
+    async def _analyze_multi_correlations(self, lang: str, results: Dict) -> None:
+        """Analyze multi-entity correlations"""
+        if len(results["entities"]) < 3:
+            return
+
+        prompt_vars = {
+            "entities": ", ".join(results["entities"]),
+            "lang": lang
+        }
+        response = await self._cached_llm_call(f"multi_correlation_map_{lang}", prompt_vars)
+        results["correlations"]["multi"][lang] = response
+
+    async def _generate_diagrams(self, lang: str, results: Dict) -> None:
+        """Generate Mermaid diagrams from correlations"""
+        if not results["correlations"]["pairs"]:
+            return
+
+        diagram = "graph TD\n"
+        for pair, desc in results["correlations"]["pairs"].items():
+            a, b = pair.split("-")
+            diagram += f'    {a} -->|"{desc[:30]}..."| {b}\n'
+        results["diagrams"][lang] = diagram
 
     # [Rest of TextProcessor implementation would go here...]
