@@ -88,12 +88,17 @@ dev:
 export-alves output_dir="analysis_output":
     mkdir -p "{{output_dir}}"
     # Extract section using dedicated script
-    @python -m obsidian_analyzer.extract_section \
-        "ESSAY.md" \
-        "{{output_dir}}/rubem_alves_ensaio.md" \
-        "## Ensaio: O Jardim dos Espinhos Florescentes"
+    @python -c "\
+from obsidian_analyzer.extract_section import extract_section; \
+from pathlib import Path; \
+extract_section(Path('ESSAY.md'), Path('{{output_dir}}')/'rubem_alves_ensaio.md', \
+               '## Ensaio: O Jardim dos Espinhos Florescentes') \
+    "
     # Run analysis with Portuguese only
-    @python -m obsidian_analyzer.main \
+    @python -c "\
+from obsidian_analyzer.main import main; \
+import asyncio; \
+asyncio.run(main())" \
         "{{output_dir}}/rubem_alves_ensaio.md" \
         -o "{{output_dir}}/rubem_alves_analysis" \
         --langs pt \
