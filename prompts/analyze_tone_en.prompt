@@ -1,13 +1,51 @@
-Analyze the predominant tone in the text below, considering:
+# Philosophical Tone Analysis Task
 
-1. Emotional characteristics
-2. Author-reader relationship
-3. Style and linguistic choices
-4. Philosophical context
+**Objective:** Perform a nuanced analysis of the textual tone, examining how stylistic choices serve philosophical communication.
 
-Text: {text}
+**Text:**  
+{text}
 
-Respond in format:
-- Predominant tone: [descriptor]
-- Characteristics: [list]
-- Effect on reader: [analysis]
+## Analysis Dimensions:
+1. **Linguistic Markers**:
+   - Sentence structure complexity
+   - Lexical density and formality
+   - Pronoun usage and perspective
+
+2. **Rhetorical Posture**:
+   - Authorial presence and positioning
+   - Engagement strategies with reader
+   - Use of irony, humor, or other tonal devices
+
+3. **Philosophical Resonance**:
+   - Alignment with philosophical tradition's typical tones
+   - Tension between content and delivery style
+
+## Required Output Format:
+```markdown
+### Tone Assessment
+**Primary Tone:** [Descriptor]  
+**Confidence Level:** [High/Medium/Low]  
+**Key Indicators:**  
+- [Feature 1]: [Example + Explanation]  
+- [Feature 2]: [Example + Explanation]
+
+### Stylistic Breakdown
+| Feature | Example | Analysis |
+|---------|---------|----------|
+| [Feature] | [Text] | [Impact] |
+
+### Philosophical Implications
+**Tradition Alignment:**  
+- How this tone reflects/complicates the philosophical tradition
+
+**Reader Engagement:**  
+- Expected effects on:  
+  - Philosophical novices: [Effects]  
+  - Academic readers: [Effects]  
+  - Opposing viewpoints: [Effects]
+
+### Comparative Analysis
+[Compare to 2-3 similar philosophical works' tones]
+```
+
+**Note:** Include a "Tone Shift Map" if significant changes occur, marking locations and philosophical significance of shifts.
