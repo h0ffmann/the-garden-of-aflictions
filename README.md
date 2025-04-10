@@ -1,14 +1,25 @@
-# Mapeamento Filosófico e Histórico da Crítica à Modernidade
+# Philosophical and Historical Mapping of Modernity's Critics
 
-Este repositório contém um mapeamento abrangente de correntes filosóficas, pensadores e conceitos relacionados à crítica da modernidade, abrangendo desde precursores antigos até manifestações contemporâneas. O objetivo é fornecer uma ferramenta de navegação conceitual para compreender as interconexões entre diferentes críticos da modernidade, suas experiências pessoais e contribuições teóricas.
+[![License: CC BY-NC 4.0](https://img.shields.io/badge/License-CC_BY--NC_4.0-lightgrey.svg)](https://creativecommons.org/licenses/by-nc/4.0/)
 
-## Sumário
+A comprehensive mapping of philosophical currents, thinkers and concepts related to the critique of modernity, spanning from ancient precursors to contemporary manifestations. The goal is to provide a conceptual navigation tool to understand the interconnections between different critics of modernity, their personal experiences and theoretical contributions.
 
-1. [Fluxo Histórico e Conceitual](#fluxo-histórico-e-conceitual)
-2. [Índice Remissivo](#índice-remissivo)
-3. [Índice Remissivo Cruzado](#índice-remissivo-cruzado)
-4. [Dimensões Biográficas: Sanidade e Gênio](#dimensões-biográficas-sanidade-e-gênio)
-5. [Dimensões Conspiratórias](#dimensões-conspiratórias)
+## Key Features
+
+- **Visual Relationship Mapping**: Mermaid diagram showing historical and conceptual connections
+- **Cross-Referenced Index**: Detailed analysis of thinkers and their interrelations  
+- **Biographical Dimensions**: Exploration of mental health and genius connections
+- **Conspiratorial Dimensions**: Analysis of conspiracy theories and their philosophical roots
+- **Multilingual Support**: Currently in Portuguese and English
+
+## Table of Contents
+
+1. [Historical and Conceptual Flow](#historical-and-conceptual-flow)
+2. [Index of Thinkers and Concepts](#index-of-thinkers-and-concepts)  
+3. [Cross-Referenced Index](#cross-referenced-index)
+4. [Biographical Dimensions: Sanity and Genius](#biographical-dimensions-sanity-and-genius)
+5. [Conspiratorial Dimensions](#conspiratorial-dimensions)
+6. [How to Contribute](#how-to-contribute)
 
 ---
 
@@ -422,8 +433,27 @@ O fluxo ilustra como as revoluções industrial e francesa estabeleceram promess
 
 ---
 
-## Licença e Contribuições
+## How to Contribute
 
-Este mapeamento filosófico e histórico está em constante desenvolvimento. Contribuições são bem-vindas para expandir as conexões entre pensadores, adicionar novas perspectivas, ou aprofundar análises existentes.
+This philosophical and historical mapping is constantly evolving. Contributions are welcome to:
 
-Licenciado sob [Creative Commons Attribution-NonCommercial 4.0 International License](https://creativecommons.org/licenses/by-nc/4.0/).
+- Expand connections between thinkers
+- Add new perspectives  
+- Deepen existing analyses
+- Improve translations
+- Suggest additional thinkers/concepts
+
+### Contribution Guidelines
+
+1. Fork the repository
+2. Create a branch for your changes
+3. Submit a pull request with:
+   - Clear description of changes
+   - References/sources when applicable
+   - Both Portuguese and English versions when possible
+
+## License
+
+Licensed under [Creative Commons Attribution-NonCommercial 4.0 International License](https://creativecommons.org/licenses/by-nc/4.0/).
+
+[![CC BY-NC 4.0](https://licensebuttons.net/l/by-nc/4.0/88x31.png)](https://creativecommons.org/licenses/by-nc/4.0/)
