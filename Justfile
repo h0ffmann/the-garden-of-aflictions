@@ -116,11 +116,25 @@ stop-mcp-server:
 
 test-mcp-connectivity:
     # Test connectivity to MCP server
-    OBSIDIAN_ANALYZER_MCP_ENABLED=true pytest tests/test_mcp_connectivity.py -v
+    uv pip install -e ".[dev]"
+    . .venv/bin/activate && OBSIDIAN_ANALYZER_MCP_ENABLED=true pytest tests/test_mcp_connectivity.py -v --log-level=INFO
+
+test-mcp-connectivity-quiet:
+    # Test connectivity to MCP server (quiet)
+    uv pip install -e ".[dev]"
+    . .venv/bin/activate && OBSIDIAN_ANALYZER_MCP_ENABLED=true pytest tests/test_mcp_connectivity.py --log-level=CRITICAL
 
 manual-test-mcp:
     # Manual test of MCP server
+    @echo "Starting MCP server..."
+    docker run -d -p 8080:8080 --name mcp-sequential-thinking mcp/sequentialthinking
+    @echo "Waiting for server to start..."
+    sleep 5
+    @echo "Testing connection..."
     curl -X POST http://localhost:8080/v1/invoke \
       -H "Content-Type: application/json" \
       -H "Authorization: Bearer test-key" \
       -d '{"tool":"sequential_thinking","inputs":{"thought":"Test thought","nextThoughtNeeded":false,"thoughtNumber":1,"totalThoughts":1},"model":"sequential-thinking"}'
+    @echo "\nStopping server..."
+    docker stop mcp-sequential-thinking
+    docker rm mcp-sequential-thinking
