@@ -14,3 +14,8 @@ __all__ = [
     'read_file',
     'load_prompt'
 ]
+from .text_processor import TextProcessor
+from .obsidian_generator import ObsidianGenerator
+from .main import main
+
+__all__ = ['TextProcessor', 'ObsidianGenerator', 'main']

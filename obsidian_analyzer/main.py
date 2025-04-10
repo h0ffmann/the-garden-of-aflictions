@@ -8,8 +8,9 @@ from pathlib import Path
 from dotenv import load_dotenv
 
 from .config import GARDEN_DIR, OUTPUT_DIR
-from . import file_handler, text_processor, obsidian_generator
-from .text_processor import sanitize_filename
+from . import file_handler
+from .text_processor import TextProcessor, sanitize_filename
+from .obsidian_generator import ObsidianGenerator
 
 async def main():
     psr = argparse.ArgumentParser(description="Analyze text documents for philosophical concepts")
