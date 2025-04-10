@@ -18,7 +18,7 @@ run file="test_data/sample_article.md":
 # Run tests (verbose with logs)
 test:
     uv pip install -e ".[dev]"
-    . .venv/bin/activate && pytest tests/ -v --log-level=INFO
+    pytest tests/ -v --log-level=INFO
 
 # Run tests quietly (no logs)
 test-quiet:
@@ -116,8 +116,8 @@ stop-mcp-server:
 
 test-mcp-connectivity:
     # Test connectivity to MCP server
-    uv pip install -e ".[dev]" pydantic-settings httpx pytest
-    OBSIDIAN_ANALYZER_MCP_ENABLED=true python -m pytest tests/test_mcp_connectivity.py -v --log-level=INFO
+    uv pip install -e ".[dev]"
+    OBSIDIAN_ANALYZER_MCP_ENABLED=true pytest tests/test_mcp_connectivity.py -v --log-level=INFO
 
 test-mcp-connectivity-quiet:
     # Test connectivity to MCP server (quiet)
