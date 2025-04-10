@@ -1,0 +1,13 @@
+Analyze polemical characteristics in the text below, considering:
+
+1. Use of controversial statements
+2. Rhetorical strategies
+3. Relation to philosophical context
+4. Potential debate impact
+
+Text: {text}
+
+Respond in format:
+- Main controversies: [list]
+- Rhetorical strategies: [description]  
+- Philosophical context: [analysis]

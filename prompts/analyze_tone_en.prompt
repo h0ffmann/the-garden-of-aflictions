@@ -1,0 +1,13 @@
+Analyze the predominant tone in the text below, considering:
+
+1. Emotional characteristics
+2. Author-reader relationship
+3. Style and linguistic choices
+4. Philosophical context
+
+Text: {text}
+
+Respond in format:
+- Predominant tone: [descriptor]
+- Characteristics: [list]
+- Effect on reader: [analysis]
