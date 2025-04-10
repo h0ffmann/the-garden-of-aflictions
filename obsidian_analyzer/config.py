@@ -20,9 +20,10 @@ class Settings(BaseSettings):
     # MCP settings
     mcp_enabled: bool = False
     mcp_server_url: str = "http://localhost:8080"
-    mcp_api_key: str = ""
+    mcp_api_key: str = "test-key"  # Default test key
     mcp_model: str = "sequential-thinking"
     mcp_timeout: int = 60
+    mcp_test_mode: bool = False  # Set to True to enable test endpoints
     
     class Config:
         env_prefix = "obsidian_analyzer_"
