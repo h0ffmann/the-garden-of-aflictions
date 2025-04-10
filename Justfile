@@ -103,3 +103,24 @@ export-alves output_dir="analysis_output":
         --langs pt \
         --skip-multi \
         --skip-pairs
+# MCP Server Management
+install-mcp-server:
+    # Pull and run the MCP Sequential Thinking server
+    docker pull mcp/sequentialthinking:latest
+    docker run -d -p 8080:8080 --name mcp-sequential-thinking mcp/sequentialthinking
+
+stop-mcp-server:
+    # Stop and remove the MCP server container
+    docker stop mcp-sequential-thinking
+    docker rm mcp-sequential-thinking
+
+test-mcp-connectivity:
+    # Test connectivity to MCP server
+    OBSIDIAN_ANALYZER_MCP_ENABLED=true pytest tests/test_mcp_connectivity.py -v
+
+manual-test-mcp:
+    # Manual test of MCP server
+    curl -X POST http://localhost:8080/v1/invoke \
+      -H "Content-Type: application/json" \
+      -H "Authorization: Bearer test-key" \
+      -d '{"tool":"sequential_thinking","inputs":{"thought":"Test thought","nextThoughtNeeded":false,"thoughtNumber":1,"totalThoughts":1},"model":"sequential-thinking"}'
