@@ -115,14 +115,14 @@ stop-mcp-server:
     docker rm mcp-sequential-thinking
 
 test-mcp-connectivity:
-    # Test connectivity to MCP server using UV
+    # Test connectivity to MCP server using UV virtualenv
     uv pip install -e ".[dev]"
-    OBSIDIAN_ANALYZER_MCP_ENABLED=true uv run pytest tests/test_mcp_connectivity.py -v --log-level=INFO
+    OBSIDIAN_ANALYZER_MCP_ENABLED=true .venv/bin/pytest tests/test_mcp_connectivity.py -v --log-level=INFO
 
 test-mcp-connectivity-quiet:
-    # Test connectivity to MCP server quietly using UV
+    # Test connectivity to MCP server quietly using UV virtualenv
     uv pip install -e ".[dev]"
-    OBSIDIAN_ANALYZER_MCP_ENABLED=true uv run pytest tests/test_mcp_connectivity.py --log-level=CRITICAL
+    OBSIDIAN_ANALYZER_MCP_ENABLED=true .venv/bin/pytest tests/test_mcp_connectivity.py --log-level=CRITICAL
 
 manual-test-mcp:
     # Manual test of MCP server
