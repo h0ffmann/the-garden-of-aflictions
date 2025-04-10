@@ -1,13 +1,51 @@
-Analise o tom predominante no texto abaixo, considerando:
+# Tarefa de Análise de Tom Filosófico
 
-1. Características emocionais
-2. Relação autor-leitor
-3. Estilo e escolhas linguísticas
-4. Contexto filosófico
+**Objetivo:** Realizar uma análise matizada do tom textual, examinando como escolhas estilísticas servem à comunicação filosófica.
 
-Texto: {text}
+**Texto:**  
+{text}
 
-Responda no formato:
-- Tom predominante: [descritor]
-- Características: [lista]
-- Efeito no leitor: [análise]
+## Dimensões de Análise:
+1. **Marcadores Linguísticos**:
+   - Complexidade da estrutura de frases
+   - Densidade lexical e formalidade
+   - Uso de pronomes e perspectiva
+
+2. **Postura Retórica**:
+   - Presença e posicionamento autoral
+   - Estratégias de engajamento com o leitor
+   - Uso de ironia, humor ou outros recursos tonais
+
+3. **Ressonância Filosófica**:
+   - Alinhamento com tons típicos da tradição filosófica
+   - Tensão entre conteúdo e estilo de apresentação
+
+## Formato de Saída Requerido:
+```markdown
+### Avaliação do Tom
+**Tom Principal:** [Descritor]  
+**Nível de Confiança:** [Alto/Médio/Baixo]  
+**Indicadores Chave:**  
+- [Característica 1]: [Exemplo + Explicação]  
+- [Característica 2]: [Exemplo + Explicação]
+
+### Detalhamento Estilístico
+| Característica | Exemplo | Análise |
+|---------------|---------|---------|
+| [Característica] | [Texto] | [Impacto] |
+
+### Implicações Filosóficas
+**Alinhamento com Tradição:**  
+- Como este tom reflete/complica a tradição filosófica
+
+**Engajamento do Leitor:**  
+- Efeitos esperados em:  
+  - Iniciantes em filosofia: [Efeitos]  
+  - Leitores acadêmicos: [Efeitos]  
+  - Visões opostas: [Efeitos]
+
+### Análise Comparativa
+[Compare com tons de 2-3 obras filosóficas semelhantes]
+```
+
+**Nota:** Inclua um "Mapa de Mudanças de Tom" se houver variações significativas, marcando locais e significância filosófica das mudanças.

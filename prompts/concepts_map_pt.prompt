@@ -1,14 +1,51 @@
-Mapeie os conceitos filosóficos presentes no texto abaixo:
+# Tarefa de Mapeamento Conceitual Filosófico
 
-Texto: {text}
+**Objetivo:** Identificar e classificar sistematicamente os conceitos filosóficos no texto, traçando suas genealogias e relações.
 
-Considere:
-1. Ideias centrais e secundárias
-2. Influências filosóficas reconhecíveis
-3. Contexto histórico
-4. Relação com a crítica da modernidade
+**Texto:**  
+{text}
 
-Responda no formato:
-- Conceitos principais: [lista]
-- Influências: [lista]
-- Contexto histórico: [descrição]
+## Metodologia:
+1. **Análise Textual**:
+   - Identificação de termos técnicos e suas definições contextuais
+   - Mapeamento de redes conceituais internas
+
+2. **Análise Histórica**:
+   - Rastreamento de origens conceituais
+   - Identificação de transformações semânticas
+
+3. **Análise Crítica**:
+   - Avaliação da originalidade conceitual
+   - Posicionamento na tradição da crítica à modernidade
+
+## Formato de Saída Requerido:
+```markdown
+### Mapa Conceitual Hierárquico
+```mermaid
+mindmap
+  root((Conceitos Chave))
+    [Conceito Principal]
+      [Subconceito 1]
+      [Subconceito 2]
+    [Conceito Secundário]
+```
+
+### Genealogia Conceitual
+| Conceito | Origem Histórica | Transformações | Autores Chave |
+|----------|------------------|----------------|---------------|
+| [Conceito] | [Origem] | [Mudanças] | [Autores] |
+
+### Análise Crítica
+**Originalidade:**
+- [Avaliação do grau de inovação]
+- [Comparação com tratamentos anteriores]
+
+**Contribuição para Crítica da Modernidade:**
+- [Impacto no debate contemporâneo]
+- [Limitações ou pontos cegos]
+
+### Sugestões de Leitura Complementar
+[2-3 obras fundamentais para cada conceito principal]
+```
+
+**Nota:** Inclua um glossário com definições operacionais para todos os conceitos identificados.
