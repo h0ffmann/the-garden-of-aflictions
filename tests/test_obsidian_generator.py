@@ -3,6 +3,20 @@ import asyncio
 import os
 from pathlib import Path
 
+import pytest
+from unittest.mock import MagicMock
+
+@pytest.fixture
+def text_processor():
+    processor = MagicMock()
+    processor.llm = MagicMock()
+    return processor
+
+@pytest.fixture 
+def obsidian_generator(text_processor):
+    from obsidian_analyzer.obsidian_generator import ObsidianGenerator
+    return ObsidianGenerator(text_processor)
+
 class TestObsidianGenerator:
     @pytest.mark.asyncio
     async def test_generate_vault(self, obsidian_generator, text_processor, tmp_path):
@@ -27,11 +41,11 @@ class TestObsidianGenerator:
 
         # Verify files were created
         expected_files = [
-            "en/index.md",
-            "en/metrics.md",
-            "en/diagrams.md",
-            "en/concepts.md",
-            "en/multicorr.md",
+            "en/00 Index.md",
+            "en/Metrics.md", 
+            "en/Diagrams.md",
+            "en/Concepts.md",
+            "en/Multi-Correlations.md",
             "en/Nietzsche.md",
             "en/Kant.md"
         ]
@@ -43,8 +57,13 @@ class TestObsidianGenerator:
     async def test_generate_lang_vault(self, obsidian_generator, tmp_path):
         """Test language-specific vault generation"""
         test_results = {
+            "source_file": "test.md",
             "entities": ["TestEntity"],
-            "langs": ["en"]
+            "langs": ["en"],
+            "correlations": {"pairs": {}, "multi": {}},
+            "key_concepts": {},
+            "metrics": {},
+            "diagrams": {}
         }
         output_dir = tmp_path / "lang_test"
         await obsidian_generator._generate_lang_vault("en", test_results, output_dir)
