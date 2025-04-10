@@ -12,18 +12,20 @@ class TestFileHandler:
     @patch('PyPDF2.PdfReader')
     @patch('os.path.join')
     @patch('os.path.isfile', return_value=True)
-    def test_read_pdf_file(self, mock_isfile, mock_join, mock_pdf):
+    @patch('builtins.print')
+    def test_read_pdf_file(self, mock_print, mock_isfile, mock_join, mock_pdf):
         """Test reading pdf file"""
         # Setup mock PDF reader
         mock_page = type('Page', (), {'extract_text': lambda self: "PDF content"})
         mock_pdf.return_value.pages = [mock_page()]
         mock_pdf.return_value.is_encrypted = False
-        
+    
         # Mock path joining to return the input path
         mock_join.side_effect = lambda *args: args[-1]
-        
+    
         content = read_file("test.pdf")
         assert content == "PDF content\n\n"
+        mock_print.assert_not_called()
 
     def test_read_nonexistent_file(self):
         """Test reading nonexistent file"""

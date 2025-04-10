@@ -15,6 +15,8 @@ class TestTextProcessor:
             assert "entities" in results
             assert "correlations" in results
             assert isinstance(results["entities"], list)
+            assert "source_file" in results
+            assert results["source_file"] == "test.md"
 
     @pytest.mark.asyncio
     async def test_analyze_text_empty(self, text_processor):

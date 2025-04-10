@@ -39,7 +39,8 @@ class ObsidianGenerator:
 
     async def _generate_index_note(self, lang: str, results: Dict, output_dir: Path) -> None:
         """Generate index note for the vault"""
-        content = f"# Analysis of {results['source_file']}\n\n"
+        source_file = results.get('source_file', 'unknown_source')
+        content = f"# Analysis of {source_file}\n\n"
         content += "## Key Entities\n"
         for entity in results.get('entities', []):
             content += f"- [[{entity}]]\n"
@@ -110,6 +111,9 @@ class ObsidianGenerator:
         for entity in results['entities']:
             file_path = output_dir / f"{entity}.md"
             content = f"# {entity}\n\n## Mentions\n- Found in analysis of [[{results['source_file']}]]\n"
-            tasks.append(aiofiles.open(file_path, 'w').write(content))
+            async def write_note(file_path, content):
+                async with aiofiles.open(file_path, 'w') as f:
+                    await f.write(content)
+            tasks.append(write_note(file_path, content))
         
         await asyncio.gather(*tasks)
