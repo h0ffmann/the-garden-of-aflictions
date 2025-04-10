@@ -84,12 +84,10 @@ update:
 dev:
     ${PYTHON} -m obsidian_analyzer.main test_data/sample_article.md -o analysis_output --langs en pt
 
-# Print all implementation files
+# Print all implementation files (excluding prompts and markdown)
 show-code:
     @echo "=== MAIN IMPLEMENTATION FILES ==="
-    @cat obsidian_analyzer/*.py
-    @echo "\n=== PROMPT FILES ===" 
-    @cat prompts/*.prompt
+    @find obsidian_analyzer -name "*.py" -not -path "*__pycache__*" -exec cat {} \;
 
 # Export Rubem Alves subsection to Obsidian
 export-alves output_dir="analysis_output":
