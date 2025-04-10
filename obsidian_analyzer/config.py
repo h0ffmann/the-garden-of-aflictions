@@ -33,6 +33,10 @@ class Settings(BaseSettings):
 # Initialize settings
 settings = Settings()
 
+# Export directory constants
+GARDEN_DIR = settings.garden_dir
+OUTPUT_DIR = settings.output_dir
+
 # Ensure directories exist
-os.makedirs(settings.garden_dir, exist_ok=True)
-os.makedirs(settings.output_dir, exist_ok=True)
+os.makedirs(GARDEN_DIR, exist_ok=True)
+os.makedirs(OUTPUT_DIR, exist_ok=True)
