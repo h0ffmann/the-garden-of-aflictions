@@ -84,6 +84,13 @@ update:
 dev:
     ${PYTHON} -m obsidian_analyzer.main test_data/sample_article.md -o analysis_output --langs en pt
 
+# Print all implementation files
+show-code:
+    @echo "=== MAIN IMPLEMENTATION FILES ==="
+    @cat obsidian_analyzer/*.py
+    @echo "\n=== PROMPT FILES ===" 
+    @cat prompts/*.prompt
+
 # Export Rubem Alves subsection to Obsidian
 export-alves output_dir="analysis_output":
     mkdir -p "{{output_dir}}"
