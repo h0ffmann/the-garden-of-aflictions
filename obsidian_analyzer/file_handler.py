@@ -1,9 +1,13 @@
 import os
 from pypdf import PdfReader
 
+import logging
+logger = logging.getLogger(__name__)
+
 def read_file(file_path: str) -> str | None:
     """Read file from garden directory or absolute path"""
     from .config import GARDEN_DIR
+    logger.info(f"Reading file: {file_path}")
     if not os.path.isabs(file_path):
         file_path = os.path.join(GARDEN_DIR, file_path)
     _, extension = os.path.splitext(file_path)

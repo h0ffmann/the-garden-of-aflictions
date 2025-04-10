@@ -15,20 +15,35 @@ install:
 run file="test_data/sample_article.md":
     ${PYTHON} -m obsidian_analyzer.main {{file}} -o analysis_output
 
-# Run tests
+# Run tests (verbose with logs)
 test:
     uv pip install -e ".[dev]"
-    . .venv/bin/activate && pytest tests/ -v
+    . .venv/bin/activate && pytest tests/ -v --log-level=INFO
 
-# Run tests with coverage
+# Run tests quietly (no logs)
+test-quiet:
+    uv pip install -e ".[dev]"
+    . .venv/bin/activate && pytest tests/ --log-level=CRITICAL
+
+# Run tests with coverage (verbose)
 test-cov:
     uv pip install -e ".[dev]"
-    . .venv/bin/activate && pytest tests/ --cov=obsidian_analyzer --cov-report=term-missing
+    . .venv/bin/activate && pytest tests/ --cov=obsidian_analyzer --cov-report=term-missing -v --log-level=INFO
 
-# Run specific test file
+# Run tests with coverage (quiet)
+test-cov-quiet:
+    uv pip install -e ".[dev]"
+    . .venv/bin/activate && pytest tests/ --cov=obsidian_analyzer --cov-report=term-missing --log-level=CRITICAL
+
+# Run specific test file (verbose)
 test-file file="tests/test_text_processor.py":
     uv pip install -e ".[dev]"
-    . .venv/bin/activate && pytest {{file}} -v
+    . .venv/bin/activate && pytest {{file}} -v --log-level=INFO
+
+# Run specific test file (quiet)
+test-file-quiet file="tests/test_text_processor.py":
+    uv pip install -e ".[dev]"
+    . .venv/bin/activate && pytest {{file}} --log-level=CRITICAL
 
 # Clean project
 clean:

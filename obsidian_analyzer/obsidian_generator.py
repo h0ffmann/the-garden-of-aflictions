@@ -8,7 +8,10 @@ from .text_processor import TextProcessor
 
 class ObsidianGenerator:
     def __init__(self, text_processor: TextProcessor):
+        import logging
+        self.logger = logging.getLogger(__name__)
         self.text_processor = text_processor
+        self.logger.info("ObsidianGenerator initialized")
 
     async def generate_vault(self, analysis_results: Dict, output_dir: str) -> None:
         """Generate complete Obsidian vault from analysis results"""
