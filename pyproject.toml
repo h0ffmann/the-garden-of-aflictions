@@ -17,7 +17,10 @@ dependencies = [
 requires-python = ">=3.12"
 
 [project.scripts]
-obsidian-analyzer = "obsidian_analyzer.main:main"
+obsidian-analyzer = "src.obsidian_analyzer.main:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
 
 [project.optional-dependencies]
 dev = [
