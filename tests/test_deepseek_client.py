@@ -20,15 +20,23 @@ async def test_client_basic_query():
         timeout=30
     )
 
-    # Simple test query
-    test_query = "What time is it now? Just respond with the current time in HH:MM format."
+    # Simple math test with random number
+    import random
+    random_num = random.randint(1, 100)
+    test_query = f"How much is 1+1? Then add {random_num} to that result and give just the final number."
     
     try:
         response = await client.ainvoke(test_query)
         print(f"\nDeepseek API Response: {response}")
         assert isinstance(response, str)
         assert len(response) > 0
-        # Basic check for time format (HH:MM)
-        assert ":" in response
+        
+        # Try to extract the numeric answer
+        try:
+            answer = int(response.strip())
+            expected = 2 + random_num
+            assert answer == expected, f"Expected {expected} but got {answer}"
+        except ValueError:
+            assert False, f"Response '{response}' is not a valid number"
     except Exception as e:
         pytest.fail(f"Client test failed: {str(e)}")
