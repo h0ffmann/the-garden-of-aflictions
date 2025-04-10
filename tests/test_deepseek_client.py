@@ -7,10 +7,10 @@ from obsidian_analyzer.deepseek_client import DeepseekClient
 @pytest.mark.e2e
 async def test_client_basic_query():
     """Test basic client functionality with a simple query"""
-    # Skip if no API key is set
+    # Require API key to be set
     import os
     if not os.getenv("DEEPSEEK_API_KEY"):
-        pytest.skip("DEEPSEEK_API_KEY not set - skipping e2e test")
+        pytest.fail("DEEPSEEK_API_KEY environment variable must be set for this test")
 
     client = DeepseekClient(
         api_key=os.getenv("DEEPSEEK_API_KEY"),
