@@ -97,11 +97,11 @@ def load_prompt(prompt_name: str, variables: Dict[str, str] = None) -> Optional[
                 raise ValueError("Templating resulted in invalid markdown")
                 
             return formatted
-        return content
-            
         except Exception as e:
             print(f"Error formatting prompt {prompt_name}: {e}")
             return None
+            
+    return content
     
     return content
 
