@@ -70,15 +70,19 @@ def load_prompt(prompt_name: str, variables: Dict[str, str] = None) -> Optional[
             # Handle both {var} and {{var}} style templates
             content = re.sub(r'\{\{(\w+)\}\}', r'{\1}', content)
             
-            # Only format if we have variables
-            if variables:
-                # Provide defaults for optional variables
-                safe_vars = {
-                    'options': variables.get('options', '{}'),
-                    'lang': variables.get('lang', 'en'),
-                    'entities': variables.get('entities', '[]'),
-                    **variables
-                }
+            # Validate required variables
+            required_vars = re.findall(r'\{(\w+)\}', content)
+            for var in required_vars:
+                if var not in variables:
+                    raise ValueError(f"Missing required template variable '{var}' in prompt {prompt_name}")
+            
+            # Provide defaults for optional variables
+            safe_vars = {
+                'options': variables.get('options', '{}'),
+                'lang': variables.get('lang', 'en'),
+                'entities': variables.get('entities', '[]'),
+                **variables
+            }
                 
                 try:
                     formatted = content.format(**safe_vars)

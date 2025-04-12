@@ -157,16 +157,14 @@ class TextProcessor:
         prompt = None
         
         # Try language-specific prompt first
-        if lang != 'en':
+        try:
+            prompt = load_prompt(f"{prompt_name}_{lang}", variables)
+        except FileNotFoundError:
+            # Fallback to English if language-specific prompt not found
             try:
-                prompt = load_prompt(f"{prompt_name}_{lang}", variables)
+                prompt = load_prompt(f"{prompt_name}_en", variables)
+                logger.warning(f"Using English prompt for {lang} analysis")
             except FileNotFoundError:
-                logger.warning(f"Prompt {prompt_name}_{lang} not found, falling back to English")
-
-        # Fallback to English
-        if not prompt:
-            prompt = load_prompt(f"{prompt_name}_en", variables)
-            if not prompt:
                 raise ValueError(f"Neither {prompt_name}_{lang} nor {prompt_name}_en prompts found")
 
         async with self._api_semaphore:
