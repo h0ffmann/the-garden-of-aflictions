@@ -25,9 +25,9 @@ just analyze file=your_text.md lang=en
 
 ## Documentation Sections
 
-- [Getting Started](docs/getting_started.md) - Installation and first steps
-- [Commands](docs/commands.md) - Complete command reference
-- [Architecture](docs/architecture.md) - System design overview
-- [Local Setup](docs/running_locally.md) - Development environment guide
+- [Getting Started](getting_started.md) - Installation and first steps
+- [Commands](commands.md) - Complete command reference
+- [Architecture](architecture.md) - System design overview
+- [Local Setup](running_locally.md) - Development environment guide
 
 > Note: Make sure to set your Deepseek API key in `.env` file
