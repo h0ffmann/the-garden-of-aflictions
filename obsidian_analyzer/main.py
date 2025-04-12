@@ -5,16 +5,44 @@ import os
 import sys
 import time
 
-# Configure logging
-logging.basicConfig(
-    level=logging.INFO,
-    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
-    handlers=[
-        logging.StreamHandler(),
-        logging.FileHandler('obsidian_analyzer.log')
-    ]
-)
+# Configure colored logging
+class ColorFormatter(logging.Formatter):
+    """Custom formatter with colored output"""
+    grey = "\x1b[38;20m"
+    yellow = "\x1b[33;20m"
+    red = "\x1b[31;20m"
+    bold_red = "\x1b[31;1m"
+    reset = "\x1b[0m"
+    format = "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+
+    FORMATS = {
+        logging.DEBUG: grey + format + reset,
+        logging.INFO: grey + format + reset,
+        logging.WARNING: yellow + format + reset,
+        logging.ERROR: red + format + reset,
+        logging.CRITICAL: bold_red + format + reset
+    }
+
+    def format(self, record):
+        log_fmt = self.FORMATS.get(record.levelno)
+        formatter = logging.Formatter(log_fmt)
+        return formatter.format(record)
+
+# Create logger
 logger = logging.getLogger(__name__)
+logger.setLevel(logging.INFO)
+
+# Create console handler with colored formatter
+ch = logging.StreamHandler()
+ch.setFormatter(ColorFormatter())
+
+# Create file handler
+fh = logging.FileHandler('obsidian_analyzer.log')
+fh.setFormatter(logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s'))
+
+# Add handlers
+logger.addHandler(ch)
+logger.addHandler(fh)
 from itertools import combinations
 from pathlib import Path
 from dotenv import load_dotenv
@@ -53,7 +81,7 @@ async def main():
     
     text_processor = TextProcessor()
     if text_processor.llm is None:
-        print("LLM initialization failed")
+        logger.error("LLM initialization failed")
         sys.exit(1)
 
     input_path = Path(args.input_file)
@@ -80,16 +108,16 @@ async def main():
     try:
         os.makedirs(args.out, exist_ok=True)
     except OSError as e:
-        print(f"Error creating output directory: {e}")
+        logger.error(f"Error creating output directory: {e}")
         return
 
-    print(f"Analyzing: {args.input_file}...")
+    logger.info(f"Analyzing: {args.input_file}...")
     st = time.time()
 
     # Rest of analysis logic would go here...
 
-    print(f"Analysis completed in {time.time()-st:.2f}s")
-    print(f"Output saved to: {args.out}")
+    logger.info(f"Analysis completed in {time.time()-st:.2f}s")
+    logger.info(f"Output saved to: {args.out}")
 
 if __name__ == "__main__":
     load_dotenv()
