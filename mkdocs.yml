@@ -31,8 +31,10 @@ plugins:
             docstring_style: "google"
             show_root_heading: true
             show_root_full_path: false
+            show_source: false
   - autorefs:
       link_titles: false
+      warn_undefined: false
 
 markdown_extensions:
   - admonition
