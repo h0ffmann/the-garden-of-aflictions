@@ -1,5 +1,25 @@
 #!/bin/bash
 
+# Function to show all Portuguese prompts
+show_pt_prompts() {
+    echo "=== Portuguese Prompts ==="
+    echo ""
+    for file in docs/prompts/*_pt.md; do
+        echo "File: $file"
+        echo "---------------------"
+        cat "$file"
+        echo ""
+        echo "====================="
+        echo ""
+    done
+}
+
+# Main script logic
+if [ "$1" == "--pt-prompts" ]; then
+    show_pt_prompts
+    exit 0
+fi
+
 # Check if input file is provided
 if [ $# -eq 0 ]; then
     echo "Usage: $0 <input_file.txt>"
