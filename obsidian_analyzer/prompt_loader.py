@@ -84,20 +84,20 @@ def load_prompt(prompt_name: str, variables: Dict[str, str] = None) -> Optional[
                 **variables
             }
                 
-                try:
-                    formatted = content.format(**safe_vars)
-                except KeyError as e:
-                    print(f"Missing required template variable {e} in prompt {prompt_name}")
-                    return None
-                    
-                # Revalidate after templating
-                html = markdown.markdown(formatted)
-                soup = BeautifulSoup(html, 'html.parser')
-                if not soup.find():
-                    raise ValueError("Templating resulted in invalid markdown")
-                    
-                return formatted
-            return content
+            try:
+                formatted = content.format(**safe_vars)
+            except KeyError as e:
+                print(f"Missing required template variable {e} in prompt {prompt_name}")
+                return None
+                
+            # Revalidate after templating
+            html = markdown.markdown(formatted)
+            soup = BeautifulSoup(html, 'html.parser')
+            if not soup.find():
+                raise ValueError("Templating resulted in invalid markdown")
+                
+            return formatted
+        return content
             
         except Exception as e:
             print(f"Error formatting prompt {prompt_name}: {e}")
