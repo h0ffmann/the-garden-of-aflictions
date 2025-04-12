@@ -36,7 +36,8 @@ def load_prompt(prompt_name: str, variables: Dict[str, str] = None) -> Optional[
                 
         if not file_path:
             raise FileNotFoundError(f"No suitable prompt found for: {prompt_name}. Tried: {', '.join(str(p) for p in possible_paths)}")
-                
+        
+        try:
             with open(file_path, 'r', encoding='utf-8') as f:
                 content = f.read()
                 
