@@ -2,16 +2,11 @@
 
 # Function to show all Portuguese prompts
 show_pt_prompts() {
-    echo "=== Portuguese Prompts ==="
-    echo ""
     for file in docs/prompts/*_pt.md; do
-        echo "File: $file"
-        echo "---------------------"
         cat "$file"
         echo ""
-        echo "====================="
-        echo ""
     done
+    echo "THIS IS THE TEXT TO BE ANALYZED: "
 }
 
 # Main script logic
