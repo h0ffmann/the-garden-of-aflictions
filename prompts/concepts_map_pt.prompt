@@ -1,51 +1,74 @@
-# Tarefa de Mapeamento Conceitual Filosófico
+# Mapeamento Conceitual Filosófico (Aprofundado)
 
-**Objetivo:** Identificar e classificar sistematicamente os conceitos filosóficos no texto, traçando suas genealogias e relações.
+**Objetivo:** Identificar, analisar e contextualizar conceitos filosóficos em textos complexos.
 
-**Texto:**  
+## Texto de Entrada:
+```text
 {text}
+```
 
 ## Metodologia:
-1. **Análise Textual**:
-   - Identificação de termos técnicos e suas definições contextuais
-   - Mapeamento de redes conceituais internas
 
-2. **Análise Histórica**:
-   - Rastreamento de origens conceituais
-   - Identificação de transformações semânticas
+### 1. Análise Textual
+- **Identificação de Conceitos**:
+  - Termos técnicos
+  - Neologismos
+  - Conceitos implícitos
+- **Relações Intratextuais**:
+  - Oposições binárias
+  - Hierarquias conceituais
+  - Redes de significação
 
-3. **Análise Crítica**:
-   - Avaliação da originalidade conceitual
-   - Posicionamento na tradição da crítica à modernidade
+### 2. Análise Histórica
+- **Genealogia**:
+  - Origem histórica
+  - Transformações semânticas
+  - Autores-chave
+- **Recepção**:
+  - Críticas principais
+  - Reformulações
 
-## Formato de Saída Requerido:
+### 3. Análise Sistemática
+- **Consistência Interna**:
+  - Coerência lógica
+  - Tensões conceituais
+- **Originalidade**:
+  - Grau de inovação
+  - Dívidas teóricas
+
+## Formato de Saída:
+
 ```markdown
-### Mapa Conceitual Hierárquico
+### Mapa Conceitual
 ```mermaid
-mindmap
-  root((Conceitos Chave))
-    [Conceito Principal]
-      [Subconceito 1]
-      [Subconceito 2]
-    [Conceito Secundário]
+flowchart LR
+    A[Conceito Central] --> B[Subconceito 1]
+    A --> C[Subconceito 2]
+    B --> D[Relação]
+    C --> D
 ```
 
-### Genealogia Conceitual
-| Conceito | Origem Histórica | Transformações | Autores Chave |
-|----------|------------------|----------------|---------------|
-| [Conceito] | [Origem] | [Mudanças] | [Autores] |
+### Tabela Analítica
+| Conceito | Definição Operacional | Autores Referência | Críticas Relevantes |
+|----------|-----------------------|--------------------|---------------------|
+| [Nome] | [Definição] | [Autores] | [Críticas] |
 
-### Análise Crítica
-**Originalidade:**
-- [Avaliação do grau de inovação]
-- [Comparação com tratamentos anteriores]
+### Análise Comparativa
+**Em relação a:**
+1. [Autor/Tradição]: [Semelhanças/Diferenças]
+2. [Autor/Tradição]: [Semelhanças/Diferenças]
 
-**Contribuição para Crítica da Modernidade:**
-- [Impacto no debate contemporâneo]
-- [Limitações ou pontos cegos]
+### Sugestões de Pesquisa
+- **Leituras Primárias**: [2-3 obras]
+- **Leituras Secundárias**: [2-3 comentários]
+- **Debates Atuais**: [Tópicos relevantes]
 
-### Sugestões de Leitura Complementar
-[2-3 obras fundamentais para cada conceito principal]
+### Glossário
+**Termo**: Definição contextual
+**Termo**: Definição contextual
 ```
 
-**Nota:** Inclua um glossário com definições operacionais para todos os conceitos identificados.
+**Observações**: 
+1. Priorizar conceitos com maior densidade teórica
+2. Indicar passagens-chave para cada conceito
+3. Sinalizar ambiguidades ou polissemias

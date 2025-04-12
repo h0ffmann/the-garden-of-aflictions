@@ -1,51 +1,70 @@
-# Philosophical Tone Analysis Task
+# Philosophical Tone Analysis (Enhanced)
 
-**Objective:** Perform a nuanced analysis of the textual tone, examining how stylistic choices serve philosophical communication.
+**Objective:** Perform a deep stylistic analysis of philosophical texts, identifying tone, rhetorical devices, and their philosophical implications.
 
-**Text:**  
+## Input Text:
+```text
 {text}
-
-## Analysis Dimensions:
-1. **Linguistic Markers**:
-   - Sentence structure complexity
-   - Lexical density and formality
-   - Pronoun usage and perspective
-
-2. **Rhetorical Posture**:
-   - Authorial presence and positioning
-   - Engagement strategies with reader
-   - Use of irony, humor, or other tonal devices
-
-3. **Philosophical Resonance**:
-   - Alignment with philosophical tradition's typical tones
-   - Tension between content and delivery style
-
-## Required Output Format:
-```markdown
-### Tone Assessment
-**Primary Tone:** [Descriptor]  
-**Confidence Level:** [High/Medium/Low]  
-**Key Indicators:**  
-- [Feature 1]: [Example + Explanation]  
-- [Feature 2]: [Example + Explanation]
-
-### Stylistic Breakdown
-| Feature | Example | Analysis |
-|---------|---------|----------|
-| [Feature] | [Text] | [Impact] |
-
-### Philosophical Implications
-**Tradition Alignment:**  
-- How this tone reflects/complicates the philosophical tradition
-
-**Reader Engagement:**  
-- Expected effects on:  
-  - Philosophical novices: [Effects]  
-  - Academic readers: [Effects]  
-  - Opposing viewpoints: [Effects]
-
-### Comparative Analysis
-[Compare to 2-3 similar philosophical works' tones]
 ```
 
-**Note:** Include a "Tone Shift Map" if significant changes occur, marking locations and philosophical significance of shifts.
+## Analysis Framework:
+
+### 1. Linguistic Analysis
+- **Sentence Structure**: 
+  - Average length
+  - Complexity (simple/compound/complex)
+  - Periodic vs. loose constructions
+- **Vocabulary**:
+  - Technical terms density
+  - Formality level
+  - Neologisms/unusual word choices
+
+### 2. Rhetorical Analysis
+- **Perspective**: 
+  - First/third person usage
+  - Authorial presence
+- **Devices**:
+  - Metaphors/analogies
+  - Rhetorical questions  
+  - Irony/sarcasm markers
+  - Repetition patterns
+
+### 3. Philosophical Context
+- **School Alignment**:
+  - Analytic vs. continental tendencies
+  - Historical period markers
+- **Argumentation Style**:
+  - Deductive/inductive
+  - Narrative vs. systematic
+
+## Output Format:
+
+```markdown
+### Tone Assessment
+**Dominant Tone**: [Academic/Polemical/Meditative/etc.]
+**Confidence**: [High/Medium/Low]
+**Key Features**:
+- [Feature 1]: [Example] → [Analysis]
+- [Feature 2]: [Example] → [Impact]
+
+### Rhetorical Map
+```mermaid
+flowchart TD
+    A[Key Passage] --> B[Tone]
+    A --> C[Devices]
+    B --> D[Philosophical Effect]
+    C --> D
+```
+
+### Comparative Analysis
+| Aspect | This Text | Typical in Tradition | Difference |
+|--------|-----------|-----------------------|------------|
+| [Aspect] | [Finding] | [Tradition Norm] | [Significance] |
+
+### Recommendations
+- **For Students**: [Study tips]
+- **For Critics**: [Analysis approaches]  
+- **For Translators**: [Challenges]
+```
+
+**Note**: Highlight any tone shifts with timestamps and philosophical justification.
