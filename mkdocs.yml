@@ -10,6 +10,11 @@ nav:
   - Testing: tests.md
   - API: api_reference.md
   - Development: development.md
+  - Prompts:
+    - Overview: prompts/overview.md
+    - Tone Analysis: prompts/analyze_tone_en.md
+    - Concept Mapping: prompts/concepts_map_pt.md
+    - Metaphor Analysis: prompts/metaphor_analysis_en.md
 
 extra:
   social:

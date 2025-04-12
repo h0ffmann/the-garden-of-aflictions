@@ -19,3 +19,25 @@ just analyze file=your_text.md lang=en
 ```bash
 just analyze file=test_data/sample_article.md lang=en
 ```
+
+## Customizing Prompts
+To override default prompts:
+1. Create a `prompts/custom/` directory
+2. Add prompt files with same names as originals
+3. The system will use your custom versions
+
+Example custom prompt structure:
+```markdown
+# My Custom Analysis
+
+**Objective:** {custom_instruction}
+
+## Input Text:
+```text
+{text}
+```
+
+## My Custom Analysis Sections:
+- {section1}
+- {section2}
+```

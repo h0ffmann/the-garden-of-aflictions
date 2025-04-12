@@ -21,3 +21,25 @@ class LLMProvider(ABC):
     async def ainvoke(prompt: str) -> str
     async def chat_completion(messages: List[Dict[str, str]], stream: bool) -> str
 ```
+
+### Prompt System
+```python
+def load_prompt(prompt_name: str, variables: Dict[str, str] = None) -> str | None
+def clear_prompt_cache() -> None
+```
+
+**Prompt Files**:
+- Located in `prompts/` directory
+- Format: Markdown with template variables like `{text}`
+- Types:
+  - `analyze_tone_en.prompt` - Tone/style analysis
+  - `concepts_map_pt.prompt` - Portuguese concept mapping  
+  - `metaphor_analysis_en.prompt` - Metaphor/poetic analysis
+
+**Usage**:
+```python
+from obsidian_analyzer.prompt_loader import load_prompt
+
+# Load and format a prompt
+prompt = load_prompt("analyze_tone_en", {"text": sample_text})
+```
