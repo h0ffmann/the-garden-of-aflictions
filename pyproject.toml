@@ -25,6 +25,11 @@ obsidian-analyzer = "obsidian_analyzer.main:main"
 where = ["."]  # Look for packages in root directory
 
 [project.optional-dependencies]
+docs = [
+    "mkdocs==1.5.3",
+    "mkdocs-material==9.5.3",
+    "mkdocstrings[python]==0.24.0"
+]
 dev = [
     "black==24.3.0",
     "isort==5.13.2",

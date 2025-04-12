@@ -1,0 +1,23 @@
+site_name: Obsidian Analyzer
+nav:
+  - Home: index.md
+  - Getting Started: getting_started.md
+  - Architecture: architecture.md  
+  - API Reference: api_reference.md
+  - Development: development.md
+
+theme:
+  name: material
+  features:
+    - navigation.tabs
+    - navigation.indexes
+
+plugins:
+  - mkdocstrings
+  - search
+
+markdown_extensions:
+  - admonition
+  - toc:
+      permalink: true
+  - pymdownx.highlight
