@@ -99,10 +99,10 @@ async def main():
                 break
     
     if not input_path.exists():
-        print(f"Input file not found: {args.input_file}")
-        print("Searched in:")
+        logger.error(f"Input file not found: {args.input_file}")
+        logger.error("Searched in:")
         for path in possible_paths:
-            print(f"  - {path}")
+            logger.error(f"  - {path}")
         return
 
     try:
