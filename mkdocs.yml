@@ -11,10 +11,10 @@ nav:
   - API: api_reference.md
   - Development: development.md
   - Prompts:
-    - Overview: prompts/overview.md
-    - Tone Analysis: prompts/analyze_tone_en.md
-    - Concept Mapping: prompts/concepts_map_pt.md
-    - Metaphor Analysis: prompts/metaphor_analysis_en.md
+    - Overview: docs/prompts/overview.md
+    - Tone Analysis: docs/prompts/analyze_tone_en.md
+    - Concept Mapping: docs/prompts/concepts_map_pt.md
+    - Metaphor Analysis: docs/prompts/metaphor_analysis_en.md
 
 extra:
   social:
