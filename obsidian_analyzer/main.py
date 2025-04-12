@@ -56,8 +56,17 @@ async def main():
         print("LLM initialization failed")
         sys.exit(1)
 
-    if not os.path.isfile(os.path.join(GARDEN_DIR, args.input_file)):
+    input_path = Path(args.input_file)
+    if not input_path.is_absolute():
+        # Try relative to current directory first
+        input_path = Path.cwd() / args.input_file
+        if not input_path.exists():
+            # Then try relative to GARDEN_DIR
+            input_path = GARDEN_DIR / args.input_file
+    
+    if not input_path.exists():
         print(f"Input file not found: {args.input_file}")
+        print(f"Looked in: {Path.cwd() / args.input_file} and {GARDEN_DIR / args.input_file}")
         return
 
     try:
