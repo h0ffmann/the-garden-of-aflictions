@@ -1,12 +1,25 @@
 #!/bin/bash
 
+#!/bin/bash
+
 # Function to show all Portuguese prompts
 show_pt_prompts() {
-    for file in docs/prompts/*_pt.md; do
+    for file in prompts/*_pt.prompt; do
         cat "$file"
         echo ""
     done
     echo "THIS IS THE TEXT TO BE ANALYZED: "
+}
+
+# Function to show prompt template
+show_prompt() {
+    local name=$1
+    local lang=$2
+    cat "prompts/${name}_${lang}.prompt"
+    echo ""
+    echo "Text: <INSERT TEXT HERE>"
+    echo "Language: ${lang}"
+    echo ""
 }
 
 # Main script logic
@@ -15,9 +28,29 @@ if [ "$1" == "--pt-prompts" ]; then
     exit 0
 fi
 
+if [ "$1" == "--all-prompts" ]; then
+    echo "=== All Analysis Prompts ==="
+    echo ""
+    echo "1. Tone Analysis (English):"
+    echo "--------------------------"
+    show_prompt "analyze_tone" "en"
+    
+    echo "2. Concept Mapping (Portuguese):"
+    echo "------------------------------"
+    show_prompt "concepts_map" "pt"
+    
+    echo "3. Metaphor Analysis (English):"
+    echo "-----------------------------"
+    show_prompt "metaphor_analysis" "en"
+    exit 0
+fi
+
 # Check if input file is provided
 if [ $# -eq 0 ]; then
-    echo "Usage: $0 <input_file.txt>"
+    echo "Usage:"
+    echo "  $0 <input_file.txt>        - Analyze specific text file"
+    echo "  $0 --pt-prompts            - Show all Portuguese prompts"
+    echo "  $0 --all-prompts           - Show all analysis prompts"
     exit 1
 fi
 
@@ -30,35 +63,16 @@ fi
 # Get absolute path of input file
 TEXT_FILE=$(realpath "$1")
 
-# Function to extract prompt content
-extract_prompt() {
-    local file=$1
-    awk '/^```python$/,/^```$/' "$file" | sed '1d;$d'
-}
-
-echo "=== Combined Analysis Prompts ==="
+echo "=== Text Analysis Setup ==="
 echo ""
-echo "1. Tone Analysis Prompt:"
-echo "------------------------"
-extract_prompt "docs/prompts/analyze_tone_en.md"
+echo "File to analyze: $TEXT_FILE"
 echo ""
-echo "Text: <INSERT TEXT FROM $TEXT_FILE>"
-echo "Language: en"
+echo "1. Copy one of these prompts:"
+echo "   - analyze_tone_en"
+echo "   - concepts_map_pt" 
+echo "   - metaphor_analysis_en"
 echo ""
-echo "2. Concept Mapping Prompt (Portuguese):"
-echo "-------------------------------------"
-extract_prompt "docs/prompts/concepts_map_pt.md"
+echo "2. Replace <INSERT TEXT HERE> with content from:"
+echo "   $TEXT_FILE"
 echo ""
-echo "Text: <INSERT TEXT FROM $TEXT_FILE>"
-echo "Language: pt"
-echo ""
-echo "3. Metaphor Analysis Prompt:"
-echo "---------------------------"
-extract_prompt "docs/prompts/metaphor_analysis_en.md"
-echo ""
-echo "Text: <INSERT TEXT FROM $TEXT_FILE>"
-echo "Language: en"
-echo ""
-echo "=== End of Prompts ==="
-echo ""
-echo "Note: Replace <INSERT TEXT FROM $TEXT_FILE> with the actual content when using."
+echo "Use './analyze_text.sh --all-prompts' to view all templates."
