@@ -1,22 +1,22 @@
 site_name: Obsidian Analyzer
 nav:
   - Home: index.md
-  - Getting Started: docs/getting_started.md
-  - Architecture: docs/architecture.md
-  - Commands: docs/commands.md
-  - CI/CD: docs/cicd.md 
-  - Local Setup: docs/running_locally.md
-  - Requirements: docs/requirements.md
-  - Testing: docs/tests.md
-  - API: docs/api_reference.md
-  - Development: docs/development.md
+  - Getting Started: getting_started.md
+  - Architecture: architecture.md
+  - Commands: commands.md
+  - CI/CD: cicd.md 
+  - Local Setup: running_locally.md
+  - Requirements: requirements.md
+  - Testing: tests.md
+  - API: api_reference.md
+  - Development: development.md
   - Examples:
-    - Sample Analysis: docs/examples/sample_analysis.md
+    - Sample Analysis: examples/sample_analysis.md
   - Prompts:
-    - Overview: docs/prompts/overview.md
-    - Tone Analysis: docs/prompts/analyze_tone_en.md
-    - Concept Mapping: docs/prompts/concepts_map_pt.md
-    - Metaphor Analysis: docs/prompts/metaphor_analysis_en.md
+    - Overview: prompts/overview.md
+    - Tone Analysis: prompts/analyze_tone_en.md
+    - Concept Mapping: prompts/concepts_map_pt.md
+    - Metaphor Analysis: prompts/metaphor_analysis_en.md
 
 extra:
   social:
