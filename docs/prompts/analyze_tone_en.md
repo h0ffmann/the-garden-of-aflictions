@@ -1,17 +1,29 @@
-# Tone Analysis Prompt (English)
+# Tone Analysis Prompt (Multilingual)
 
 ## Purpose
 Analyze rhetorical style and tone in texts, with special attention to language-specific characteristics.
 
-## Language Notes
-- For English texts:
-  - Note formality levels (academic, conversational, etc.)
-  - Identify regional variations (US/UK/AU English)
-  - Highlight rhetorical devices common in English
-- For Portuguese texts:
-  - Analyze use of informal pronouns (você/tu)
-  - Note regional expressions and cultural references
-  - Pay attention to levels of formality which may differ from English
+## Supported Languages
+- English (en)
+- Portuguese (pt)
+
+## Language-Specific Analysis
+For each language, analyze:
+1. **Formality Levels**:
+   - English: academic, conversational, colloquial
+   - Portuguese: formal/informal pronouns (você/tu), verb conjugations
+
+2. **Regional Variations**:
+   - English: US/UK/AU differences
+   - Portuguese: PT-BR vs PT-PT differences
+
+3. **Cultural References**:
+   - Note any culture-specific idioms or references
+   - For Portuguese: analyze use of diminutives and local expressions
+
+4. **Rhetorical Devices**:
+   - Language-specific rhetorical patterns
+   - Common stylistic devices in each language
 
 ## Template Variables
 - `{text}`: The input text to analyze

@@ -21,10 +21,21 @@ def load_prompt(prompt_name: str, variables: Dict[str, str] = None) -> Optional[
     if prompt_name in _prompt_cache:
         content = _prompt_cache[prompt_name]
     else:
-        file_path = PROMPTS_DIR / f"{prompt_name}.md"
-        try:
-            if not file_path.is_file():
-                raise FileNotFoundError(f"Markdown prompt not found: {file_path}")
+        # Try possible filename variations
+        possible_paths = [
+            PROMPTS_DIR / f"{prompt_name}.md",
+            PROMPTS_DIR / f"{prompt_name.split('_')[0]}_en.md",  # fallback to English
+            PROMPTS_DIR / f"{prompt_name.split('_')[0]}.md"      # fallback to base name
+        ]
+        
+        file_path = None
+        for path in possible_paths:
+            if path.is_file():
+                file_path = path
+                break
+                
+        if not file_path:
+            raise FileNotFoundError(f"No suitable prompt found for: {prompt_name}. Tried: {', '.join(str(p) for p in possible_paths)}")
                 
             with open(file_path, 'r', encoding='utf-8') as f:
                 content = f.read()
