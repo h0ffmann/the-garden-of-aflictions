@@ -15,23 +15,32 @@ fi
 # Get absolute path of input file
 TEXT_FILE=$(realpath "$1")
 
+# Function to extract prompt content
+extract_prompt() {
+    local file=$1
+    awk '/^```python$/,/^```$/' "$file" | sed '1d;$d'
+}
+
 echo "=== Combined Analysis Prompts ==="
 echo ""
 echo "1. Tone Analysis Prompt:"
 echo "------------------------"
-echo "# Tone Analysis"
+extract_prompt "docs/prompts/analyze_tone_en.md"
+echo ""
 echo "Text: <INSERT TEXT FROM $TEXT_FILE>"
 echo "Language: en"
 echo ""
 echo "2. Concept Mapping Prompt (Portuguese):"
 echo "-------------------------------------"
-echo "# Concept Mapping"
+extract_prompt "docs/prompts/concepts_map_pt.md"
+echo ""
 echo "Text: <INSERT TEXT FROM $TEXT_FILE>"
 echo "Language: pt"
 echo ""
 echo "3. Metaphor Analysis Prompt:"
 echo "---------------------------"
-echo "# Metaphor Analysis"
+extract_prompt "docs/prompts/metaphor_analysis_en.md"
+echo ""
 echo "Text: <INSERT TEXT FROM $TEXT_FILE>"
 echo "Language: en"
 echo ""
