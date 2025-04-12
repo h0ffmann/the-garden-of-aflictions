@@ -32,4 +32,3 @@ flowchart LR
 **Termo**: Definição
 ```
 
-[View Full Prompt Template](../../prompts/concepts_map_pt.prompt)

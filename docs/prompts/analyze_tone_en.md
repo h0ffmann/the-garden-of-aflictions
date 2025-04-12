@@ -37,4 +37,3 @@ flowchart TD
 - For Critics: [Approaches]
 ```
 
-[View Full Prompt Template](../../prompts/analyze_tone_en.prompt)
