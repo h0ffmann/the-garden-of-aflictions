@@ -80,6 +80,16 @@ update:
     uv pip compile --upgrade
     uv pip sync
 
+# Build documentation
+docs:
+    uv pip install -e ".[docs]"
+    mkdocs build
+
+# Serve documentation locally
+docs-serve:
+    uv pip install -e ".[docs]"
+    mkdocs serve
+
 # Run in development mode
 dev:
     ${PYTHON} -m obsidian_analyzer.main test_data/sample_article.md -o analysis_output --langs en pt
