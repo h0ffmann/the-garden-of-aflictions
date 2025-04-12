@@ -57,30 +57,18 @@ class TextProcessor:
             nltk.download('punkt', quiet=True)
 
     def _init_llm(self):
-        if settings.mcp_enabled:
-            if not settings.mcp_api_key:
-                raise ValueError("MCP is enabled but mcp_api_key is not configured")
-            
-            from .llm_provider import MCPClient
-            return MCPClient(
-                base_url=settings.mcp_server_url,
-                api_key=settings.mcp_api_key,
-                model=settings.mcp_model,
-                timeout=settings.mcp_timeout
-            )
-        else:
-            api_key = os.getenv("DEEPSEEK_API_KEY")
-            if not api_key:
-                raise ValueError("DEEPSEEK_API_KEY environment variable missing")
+        api_key = os.getenv("DEEPSEEK_API_KEY")
+        if not api_key:
+            raise ValueError("DEEPSEEK_API_KEY environment variable missing")
 
-            from .deepseek_client import DeepseekClient
-            return DeepseekClient(
-                api_key=api_key,
-                base_url=os.getenv("DEEPSEEK_API_BASE", "https://api.deepseek.com/v1"),
-                model=os.getenv("DEEPSEEK_MODEL_NAME", "deepseek-chat"),
-                temperature=0.2,
-                timeout=120
-            )
+        from .deepseek_client import DeepseekClient
+        return DeepseekClient(
+            api_key=api_key,
+            base_url=os.getenv("DEEPSEEK_API_BASE", "https://api.deepseek.com/v1"),
+            model=os.getenv("DEEPSEEK_MODEL_NAME", "deepseek-chat"),
+            temperature=0.2,
+            timeout=120
+        )
 
     def split_text(self, text: str) -> List[Document]:
         """Split text into chunks using the configured splitter"""
