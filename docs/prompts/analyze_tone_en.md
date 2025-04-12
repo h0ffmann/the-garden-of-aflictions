@@ -34,9 +34,16 @@ For each language, analyze:
 ```python
 from obsidian_analyzer.prompt_loader import load_prompt
 
+# For English analysis
 prompt = load_prompt("analyze_tone_en", {
     "text": sample_text,
-    "lang": "en"  # or "pt" for Portuguese
+    "lang": "en"
+})
+
+# For Portuguese analysis (will automatically use English prompt with Portuguese guidance)
+prompt = load_prompt("analyze_tone_pt", {
+    "text": sample_text, 
+    "lang": "pt"
 })
 ```
 

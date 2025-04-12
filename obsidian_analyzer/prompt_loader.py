@@ -21,11 +21,16 @@ def load_prompt(prompt_name: str, variables: Dict[str, str] = None) -> Optional[
     if prompt_name in _prompt_cache:
         content = _prompt_cache[prompt_name]
     else:
+        # Clean up prompt name by removing duplicate language codes
+        parts = prompt_name.split('_')
+        if len(parts) > 2 and parts[-1] == parts[-2]:  # e.g. analyze_tone_pt_pt
+            prompt_name = '_'.join(parts[:-1])
+            
         # Try possible filename variations
         possible_paths = [
             PROMPTS_DIR / f"{prompt_name}.md",
-            PROMPTS_DIR / f"{prompt_name.split('_')[0]}_en.md",  # fallback to English
-            PROMPTS_DIR / f"{prompt_name.split('_')[0]}.md"      # fallback to base name
+            PROMPTS_DIR / f"{'_'.join(parts[:-1]) if len(parts) > 1 else prompt_name}_en.md",
+            PROMPTS_DIR / f"{'_'.join(parts[:-1]) if len(parts) > 1 else prompt_name}.md"
         ]
         
         file_path = None
