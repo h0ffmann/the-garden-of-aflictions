@@ -12,30 +12,29 @@ if [ ! -f "$1" ]; then
     exit 1
 fi
 
-# Read file content and escape special characters
-TEXT_CONTENT=$(<"$1")
-TEXT_CONTENT=${TEXT_CONTENT//$'\n'/\\n}
-TEXT_CONTENT=${TEXT_CONTENT//\"/\\\"}
+# Get absolute path of input file
+TEXT_FILE=$(realpath "$1")
 
-# Generate the combined prompts output
 echo "=== Combined Analysis Prompts ==="
 echo ""
 echo "1. Tone Analysis Prompt:"
 echo "------------------------"
 echo "# Tone Analysis"
-echo "Text: \"$TEXT_CONTENT\""
+echo "Text: <INSERT TEXT FROM $TEXT_FILE>"
 echo "Language: en"
 echo ""
 echo "2. Concept Mapping Prompt (Portuguese):"
 echo "-------------------------------------"
 echo "# Concept Mapping"
-echo "Text: \"$TEXT_CONTENT\""
+echo "Text: <INSERT TEXT FROM $TEXT_FILE>"
 echo "Language: pt"
 echo ""
 echo "3. Metaphor Analysis Prompt:"
 echo "---------------------------"
 echo "# Metaphor Analysis"
-echo "Text: \"$TEXT_CONTENT\""
+echo "Text: <INSERT TEXT FROM $TEXT_FILE>"
 echo "Language: en"
 echo ""
 echo "=== End of Prompts ==="
+echo ""
+echo "Note: Replace <INSERT TEXT FROM $TEXT_FILE> with the actual content when using."
