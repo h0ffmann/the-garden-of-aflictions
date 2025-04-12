@@ -58,15 +58,23 @@ async def main():
 
     input_path = Path(args.input_file)
     if not input_path.is_absolute():
-        # Try relative to current directory first
-        input_path = Path.cwd() / args.input_file
-        if not input_path.exists():
-            # Then try relative to GARDEN_DIR
-            input_path = GARDEN_DIR / args.input_file
+        # Try all possible locations
+        possible_paths = [
+            Path.cwd() / args.input_file,
+            GARDEN_DIR / args.input_file,
+            Path(__file__).parent.parent / args.input_file
+        ]
+        
+        for path in possible_paths:
+            if path.exists():
+                input_path = path
+                break
     
     if not input_path.exists():
         print(f"Input file not found: {args.input_file}")
-        print(f"Looked in: {Path.cwd() / args.input_file} and {GARDEN_DIR / args.input_file}")
+        print("Searched in:")
+        for path in possible_paths:
+            print(f"  - {path}")
         return
 
     try:
