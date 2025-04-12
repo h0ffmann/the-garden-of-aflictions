@@ -14,9 +14,10 @@ nav:
     - Sample Analysis: examples/sample_analysis.md
   - Prompts:
     - Overview: prompts/overview.md
-    - Tone Analysis: prompts/analyze_tone_en.md
-    - Concept Mapping: prompts/concepts_map_pt.md
-    - Metaphor Analysis: prompts/metaphor_analysis_en.md
+    - Tone Analysis (English): prompts/analyze_tone_en.md
+    - Tone Analysis (Portuguese): prompts/analyze_tone_pt.md
+    - Concept Mapping (Portuguese): prompts/concepts_map_pt.md
+    - Metaphor Analysis (English): prompts/metaphor_analysis_en.md
 
 extra:
   social:
