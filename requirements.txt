@@ -6,3 +6,5 @@ nltk>=3.8.1
 matplotlib>=3.8.0
 wikipedia>=1.4.0
 aiofiles>=23.2.1
+click>=8.0.0
+typing-extensions>=4.0.0; python_version < '3.8'
