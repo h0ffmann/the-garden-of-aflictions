@@ -114,10 +114,38 @@ async def main():
     logger.info(f"Analyzing: {args.input_file}...")
     st = time.time()
 
-    # Rest of analysis logic would go here...
+    try:
+        # Read input file
+        text = file_handler.read_file(str(input_path))
+        if not text:
+            logger.error(f"Failed to read file: {input_path}")
+            return
 
-    logger.info(f"Analysis completed in {time.time()-st:.2f}s")
-    logger.info(f"Output saved to: {args.out}")
+        # Process text
+        results = {}
+        for lang in args.langs:
+            analysis = await text_processor.analyze_text(str(input_path), [lang], {
+                'skip_pairs': args.skip_pairs,
+                'skip_multi': args.skip_multi,
+                'skip_concepts': args.skip_concepts,
+                'skip_metrics': args.skip_metrics,
+                'skip_diagrams': args.skip_diagrams,
+                'skip_ai': args.skip_ai,
+                'max_pairs': args.max_pairs
+            })
+            results[lang] = analysis
+
+        # Generate Obsidian output
+        generator = ObsidianGenerator(text_processor)
+        await generator.generate_vault(results, args.out)
+
+        logger.info(f"Analysis completed in {time.time()-st:.2f}s")
+        logger.info(f"Output saved to: {args.out}")
+
+    except Exception as e:
+        logger.error(f"Analysis failed: {str(e)}")
+        if hasattr(e, '__traceback__'):
+            logger.debug("Traceback:", exc_info=e)
 
 if __name__ == "__main__":
     load_dotenv()
