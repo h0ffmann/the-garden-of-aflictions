@@ -1,6 +1,6 @@
 site_name: Obsidian Analyzer
 nav:
-  - Home: index.md
+  - Home: docs/index.md
   - Getting Started: getting_started.md
   - Architecture: DOCS_architecture.md
   - Commands: DOCS_just_commands.md

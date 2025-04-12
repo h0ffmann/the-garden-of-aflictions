@@ -83,12 +83,12 @@ update:
 # Build documentation
 docs:
     uv pip install -e ".[docs]"
-    mkdocs build
+    mkdocs build --strict
 
 # Serve documentation locally
 docs-serve:
     uv pip install -e ".[docs]"
-    mkdocs serve
+    mkdocs serve --strict
 
 # Run in development mode
 dev:
