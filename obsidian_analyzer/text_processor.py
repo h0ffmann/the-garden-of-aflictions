@@ -147,6 +147,8 @@ class TextProcessor:
 
     async def _cached_llm_call(self, prompt_name: str, variables: Dict[str, str]) -> str:
         """Make LLM calls with caching and language fallback"""
+        import logging
+        logger = logging.getLogger(__name__)
         cache_key = (prompt_name, frozenset(variables.items()))
         if cache_key in self._response_cache:
             return self._response_cache[cache_key]
