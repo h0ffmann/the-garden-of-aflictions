@@ -26,9 +26,9 @@ For each language, analyze:
    - Common stylistic devices in each language
 
 ## Template Variables
-- `{text}`: The input text to analyze
-- `{lang}`: Language code (en/pt)
-- `{options}`: Analysis options JSON
+- `{text}`: (Required) The input text to analyze
+- `{lang}`: (Optional) Language code (en/pt)
+- `{options}`: (Optional) Analysis options JSON
 
 ## Example Usage
 ```python
