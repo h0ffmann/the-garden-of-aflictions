@@ -41,6 +41,12 @@ plugins:
   - autorefs:
       link_titles: false
 
+extra_javascript:
+  - https://cdnjs.cloudflare.com/ajax/libs/showdown/2.1.0/showdown.min.js
+
+extra_css:
+  - css/prompts.css
+
 markdown_extensions:
   - admonition
   - toc:

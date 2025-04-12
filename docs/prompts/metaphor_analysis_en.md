@@ -32,4 +32,4 @@ flowchart LR
 - [Conceptual clarity]
 ```
 
-[View Full Prompt Template](../prompts/metaphor_analysis_en.md)
+[View Full Prompt Template](../../prompts/metaphor_analysis_en.md)

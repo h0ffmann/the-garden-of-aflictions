@@ -1,0 +1,23 @@
+.prompt-display {
+    background-color: #f8f9fa;
+    border: 1px solid #dee2e6;
+    border-radius: 4px;
+    padding: 1rem;
+    margin: 1rem 0;
+    font-family: monospace;
+    white-space: pre-wrap;
+}
+
+.prompt-display h1, 
+.prompt-display h2,
+.prompt-display h3 {
+    color: #2c3e50;
+    margin-top: 0;
+}
+
+.prompt-display pre {
+    background-color: #f1f3f5;
+    padding: 0.5rem;
+    border-radius: 3px;
+    overflow-x: auto;
+}

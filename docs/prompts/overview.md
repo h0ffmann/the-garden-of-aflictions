@@ -19,12 +19,27 @@ The Obsidian Analyzer uses structured prompts to guide the LLM analysis. These m
 - Analyzes poetic elements
 - Evaluates philosophical implications
 
+## Viewing Prompts
+
+Prompt templates can be viewed directly in the documentation by clicking the "View Full Prompt Template" links. 
+
 ## Customization
 
 1. Create `prompts/custom/` directory
-2. Add modified prompt files
-3. Keep same naming convention
-4. Maintain required template variables
+2. Add modified prompt files with same names
+3. Maintain required template variables
+4. Keep Markdown formatting
+
+Example directory structure:
+```
+prompts/
+├── custom/
+│   ├── analyze_tone_en.md
+│   └── concepts_map_pt.md
+└── original/
+    ├── analyze_tone_en.md
+    └── concepts_map_pt.md
+```
 
 ## Template Variables
 
