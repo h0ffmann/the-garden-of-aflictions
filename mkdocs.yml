@@ -2,9 +2,19 @@ site_name: Obsidian Analyzer
 nav:
   - Home: index.md
   - Getting Started: getting_started.md
-  - Architecture: architecture.md  
-  - API Reference: api_reference.md
+  - Architecture: DOCS_architecture.md
+  - Commands: DOCS_just_commands.md
+  - CI/CD: DOCS_cicd.md
+  - Local Setup: DOCS_running_locally.md
+  - Requirements: DOCS_requirements.md
+  - Testing: DOCS_tests.md
+  - API: api_reference.md
   - Development: development.md
+
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/your/repo
 
 theme:
   name: material
