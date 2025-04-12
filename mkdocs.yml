@@ -1,15 +1,15 @@
 site_name: Obsidian Analyzer
 nav:
-  - Home: docs/index.md
-  - Getting Started: getting_started.md
-  - Architecture: DOCS_architecture.md
-  - Commands: DOCS_just_commands.md
-  - CI/CD: DOCS_cicd.md
-  - Local Setup: DOCS_running_locally.md
-  - Requirements: DOCS_requirements.md
-  - Testing: DOCS_tests.md
-  - API: api_reference.md
-  - Development: development.md
+  - Home: index.md
+  - Getting Started: docs/getting_started.md
+  - Architecture: docs/architecture.md
+  - Commands: docs/commands.md
+  - CI/CD: docs/cicd.md 
+  - Local Setup: docs/running_locally.md
+  - Requirements: docs/requirements.md
+  - Testing: docs/tests.md
+  - API: docs/api_reference.md
+  - Development: docs/development.md
 
 extra:
   social:
