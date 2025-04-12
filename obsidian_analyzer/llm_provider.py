@@ -2,7 +2,16 @@ from abc import ABC, abstractmethod
 from typing import List, Dict, Any, AsyncGenerator
 
 class LLMProvider(ABC):
-    """Abstract base class for LLM providers"""
+    """Abstract base class for LLM providers.
+    
+    Implementations must provide:
+    - Synchronous prompt invocation
+    - Chat completion streaming
+    - Resource cleanup
+    
+    Note:
+        All methods must be implemented as async coroutines.
+    """
     
     @abstractmethod
     async def ainvoke(self, prompt: str) -> str:

@@ -1,3 +1,16 @@
+"""Text processing and analysis pipeline.
+
+Provides:
+- Text chunking and splitting
+- Entity recognition
+- Concept mapping
+- Correlation analysis
+- Metrics calculation
+
+The processor coordinates LLM calls and caches responses
+to optimize performance.
+"""
+
 import os
 import re
 import asyncio

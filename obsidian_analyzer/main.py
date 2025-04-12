@@ -25,6 +25,17 @@ from .text_processor import TextProcessor, sanitize_filename
 from .obsidian_generator import ObsidianGenerator
 
 async def main():
+    """Main entry point for the Obsidian Analyzer CLI.
+    
+    Handles:
+    - Command line argument parsing
+    - Text processing pipeline setup
+    - Analysis execution
+    - Results generation
+    
+    Example:
+        $ obsidian-analyzer sample.md --langs en pt --out ./analysis_results
+    """
     psr = argparse.ArgumentParser(description="Analyze text documents for philosophical concepts")
     from .config import GARDEN_DIR, OUTPUT_DIR
     psr.add_argument("input_file", help="File name relative to garden_of_afflictions directory")
