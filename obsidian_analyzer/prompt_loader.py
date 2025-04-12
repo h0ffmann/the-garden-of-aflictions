@@ -21,17 +21,21 @@ def load_prompt(prompt_name: str, variables: Dict[str, str] = None) -> Optional[
     if prompt_name in _prompt_cache:
         content = _prompt_cache[prompt_name]
     else:
-        # Clean up prompt name by removing duplicate language codes
+        # Handle language codes - don't modify names with valid language suffixes
         parts = prompt_name.split('_')
-        if len(parts) > 2 and parts[-1] == parts[-2]:  # e.g. analyze_tone_pt_pt
-            prompt_name = '_'.join(parts[:-1])
+        if len(parts) > 1 and parts[-1] in ('en', 'pt'):  # Valid language code
+            prompt_name = prompt_name  # Keep as-is
             
         # Try possible filename variations
-        possible_paths = [
-            PROMPTS_DIR / f"{prompt_name}.md",
-            PROMPTS_DIR / f"{'_'.join(parts[:-1]) if len(parts) > 1 else prompt_name}_en.md",
-            PROMPTS_DIR / f"{'_'.join(parts[:-1]) if len(parts) > 1 else prompt_name}.md"
-        ]
+        possible_paths = []
+        
+        # First try exact name
+        possible_paths.append(PROMPTS_DIR / f"{prompt_name}.md")
+        
+        # If name has a language code, try without it
+        parts = prompt_name.split('_')
+        if len(parts) > 1 and parts[-1] in ('en', 'pt'):
+            possible_paths.append(PROMPTS_DIR / f"{'_'.join(parts[:-1])}.md")
         
         file_path = None
         for path in possible_paths:
@@ -40,7 +44,10 @@ def load_prompt(prompt_name: str, variables: Dict[str, str] = None) -> Optional[
                 break
                 
         if not file_path:
-            raise FileNotFoundError(f"No suitable prompt found for: {prompt_name}. Tried: {', '.join(str(p) for p in possible_paths)}")
+            raise FileNotFoundError(
+                f"Prompt file not found for: {prompt_name}\n"
+                f"Tried paths:\n- " + "\n- ".join(str(p) for p in possible_paths)
+            )
         
         try:
             with open(file_path, 'r', encoding='utf-8') as f:
