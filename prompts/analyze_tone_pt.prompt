@@ -49,3 +49,46 @@
 ```
 
 **Nota:** Inclua um "Mapa de Mudanças de Tom" se houver variações significativas, marcando locais e significância filosófica das mudanças.
+# Análise de Tom (Português)
+
+## Propósito
+Analisa estilo retórico e tom filosófico em textos em português.
+
+## Variáveis do Template
+- `{text}`: Texto para análise
+- `{lang}`: pt
+- `{options}`: Opções de análise em JSON
+
+## Exemplo de Uso
+```python
+from obsidian_analyzer.prompt_loader import load_prompt
+
+prompt = load_prompt("analyze_tone_pt", {
+    "text": texto_em_portugues,
+    "lang": "pt"
+})
+```
+
+## Estrutura de Saída
+```markdown
+### Avaliação de Tom
+**Tom Dominante**: [descritor]
+**Características Principais**:
+- [Característica]: [Exemplo] → [Análise]
+
+### Mapa Retórico
+```mermaid
+flowchart TD
+    A[Trecho Chave] --> B[Tom]
+    A --> C[Recursos Estilísticos]
+```
+
+### Recomendações
+- Para Estudantes: [Dicas]
+- Para Críticos: [Abordagens]
+```
+
+**Notas**:
+- Foco em análise filosófica, não apenas linguística
+- Considerar contexto cultural brasileiro/português
+- Identificar marcas de oralidade quando presentes

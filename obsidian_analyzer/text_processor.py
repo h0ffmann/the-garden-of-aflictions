@@ -146,14 +146,26 @@ class TextProcessor:
         return results
 
     async def _cached_llm_call(self, prompt_name: str, variables: Dict[str, str]) -> str:
-        """Make LLM calls with caching"""
+        """Make LLM calls with caching and language fallback"""
         cache_key = (prompt_name, frozenset(variables.items()))
         if cache_key in self._response_cache:
             return self._response_cache[cache_key]
 
-        prompt = load_prompt(prompt_name, variables)
+        lang = variables.get('lang', 'en')
+        prompt = None
+        
+        # Try language-specific prompt first
+        if lang != 'en':
+            try:
+                prompt = load_prompt(f"{prompt_name}_{lang}", variables)
+            except FileNotFoundError:
+                logger.warning(f"Prompt {prompt_name}_{lang} not found, falling back to English")
+
+        # Fallback to English
         if not prompt:
-            raise ValueError(f"Prompt {prompt_name} not found")
+            prompt = load_prompt(f"{prompt_name}_en", variables)
+            if not prompt:
+                raise ValueError(f"Neither {prompt_name}_{lang} nor {prompt_name}_en prompts found")
 
         async with self._api_semaphore:
             response = await self.llm.ainvoke(prompt)
