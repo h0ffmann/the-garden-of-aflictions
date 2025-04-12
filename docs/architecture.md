@@ -6,6 +6,8 @@
 - Text splitting and chunking
 - Entity extraction
 - Concept mapping
+- Metaphor analysis
+- Poetic elements detection
 - Correlation analysis
 
 ### LLM Integration
