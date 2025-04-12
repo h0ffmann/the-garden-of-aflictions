@@ -1,5 +1,15 @@
-.aider*
+# Environment files
 .env
+.env.*
+!.env.example
+
+# Development/testing
+.aider*
+.venv/
+venv/
+ENV/
+env/
+
 # Python
 __pycache__/
 *.py[cod]
